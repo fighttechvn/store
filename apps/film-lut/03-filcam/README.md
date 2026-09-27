@@ -15,7 +15,7 @@ Quy ước ID, ưu tiên, gói và ước tính theo [README chung](../README.md
 - **Cơ hội:** "lut màu" tăng 4,15 lần ở Việt Nam, "cube lut" 2,04 lần và "color grading" 1,88 lần toàn cầu. Trên Play, app #1 cho từ khóa "lut" chỉ có 13.685 lượt cài. Trên iOS, app LUT nhỏ bán được $35–60/năm.
 - **Lời hứa:** "Quay có LUT ngay trên màn hình. 1080p có LUT, chỉnh tay và RAW DNG miễn phí mãi. Không quảng cáo, không watermark, mua đứt được."
 - **Thiết bị:** mọi tính năng video hỏi năng lực máy trước và ẩn thứ máy không làm được, như FilCam đang làm với phần ảnh. Ma trận 10–13 máy chia tier A/B/C; danh sách máy hỗ trợ được công bố (mục 5.8).
-- **Lịch:** 2 dev Android làm từ 5/4/2027; ra mắt cuối 7/2027 (Q3, khớp Bảng 13); V1 trong 8–10/2027; iOS (V2) chỉ khi đạt mốc đo, dự kiến Q1/2028 ⚠.
+- **Lịch:** 2 dev Android (dev A và dev D trong [lịch cả họ app](../README.md#lịch-và-nhân-sự-cả-họ-app)) làm từ 5/4/2027; phần lõi FilCam cần xong trước 19/4/2027; staged rollout 26/7 – 6/8/2027 (Q3, khớp Bảng 13); V1 trong 8–10/2027; iOS (V2) chỉ khi đạt mốc đo, dự kiến Q1/2028 ⚠.
 - **Nguồn lực:** Có sẵn + MVP **103 ngày công**; V1 75 ngày; V2 43 ngày (37 ngày iOS). Tổng 221 ngày, 107 feature. Thêm khoảng 37,5 ngày nội dung (look, LUT kỹ thuật, bài học).
 
 ## 2. Hiện trạng FilCam 1.0.21
@@ -79,7 +79,7 @@ Bảng feature đầy đủ, ước tính và tiêu chí nghiệm thu ở [epics
 
 ### 5.2 Quay video có LUT (FCM-E02)
 
-**Đường video hai nhánh.** Camera mở hai luồng qua `SessionConfig` của CameraX 1.6: luồng preview (≤ 1080p) và luồng ghi (1080p hoặc 4K). Mỗi luồng có một `CameraEffect` riêng dùng `SurfaceProcessor` của `:core:gpu`.
+**Đường video hai nhánh.** Camera mở hai luồng qua `SessionConfig` của CameraX 1.6: luồng preview (≤ 1080p) và luồng ghi (1080p hoặc 4K). Mỗi luồng có một `CameraEffect` riêng dùng `SurfaceProcessor` của `:core:gpu` (wrapper hai effect của lõi, FLC-E01-29; công cụ đo là `EffectPass` có cờ `previewOnly`, FLC-E01-30).
 
 ```
                   CameraX 1.6: SessionConfig(Preview + VideoCapture<Recorder>), kiểm bằng isSessionConfigSupported
@@ -167,7 +167,7 @@ Góc cố định thì bù sáng bằng ISO. Khi ISO thấp nhất vẫn dư sá
 }
 ```
 
-Không ghi GPS. File sidecar không phải media nên không vào `Movies/` qua MediaStore Video; đề xuất `Documents/FilCam/` qua `MediaStore.Files` ⚠ (cần lõi thêm API, xem [Điều chỉnh lõi](epics-features.md#điều-chỉnh-lõi)). FilCam giữ bảng nối clip ↔ sidecar, nên mở clip trong trình chỉnh màu thì look tự áp. CameraX `Recorder` chưa cho ghi metadata tùy ý vào MP4 ⚠, nên chưa nhúng thông tin vào file video.
+Không ghi GPS. File sidecar không phải media nên không vào `Movies/` qua MediaStore Video; đề xuất `Documents/FilCam/` qua `MediaStore.Files` ⚠ (API của lõi FLC-E06-08, xem [Điều chỉnh lõi](epics-features.md#điều-chỉnh-lõi)). FilCam giữ bảng nối clip ↔ sidecar, nên mở clip trong trình chỉnh màu thì look tự áp. CameraX `Recorder` chưa cho ghi metadata tùy ý vào MP4 ⚠, nên chưa nhúng thông tin vào file video.
 
 **Màn quay.** Dải look vuốt ngang, thanh cường độ, giữ để xem gốc, chia đôi A/B; đồng hồ, phút còn lại (theo bitrate và dung lượng trống), pin, nhiệt; tạm dừng/tiếp tục; khung tỉ lệ 2.39:1, 1.85:1, 4:5, 1:1, 9:16 và vùng an toàn TikTok/Reels chỉ ở preview; chọn ống kính 0.5×/1×/tele theo thứ máy mở cho app bên thứ ba; dừng ghi an toàn khi còn 500 MB.
 
@@ -196,7 +196,7 @@ x = (9^((y − 0,06) / 0,90) − 1) / 8       (hàm ngược, dùng cho LUT kỹ
 Nguyên tắc: nâng đen lên 0,06 để không bị cắt khi nén; xám 18% ở 0,425, gần mốc của các đường Log phổ biến (khoảng 0,39–0,42); không có "vai" cứng ở vùng sáng như đường cong mặc định của ISP; chừa 0,04 ở đỉnh. FM-Log **không tăng dải động của cảm biến**; nó làm ảnh phẳng và phân bổ lại mã để chỉnh sau. App và bài học nói rõ điều này.
 
 **Hai cách tạo FM-Log.**
-- **Qua ISP (ưu tiên):** đặt `CaptureRequest.TONEMAP_MODE = TONEMAP_MODE_CONTRAST_CURVE` và `TONEMAP_CURVE` lấy mẫu FM-Log (tối đa `TONEMAP_MAX_CURVE_POINTS`, thường ≥ 64 ⚠) qua `Camera2CameraControl`. ISP áp đường cong ở độ chính xác cao trước khi lượng tử 8-bit, nên ít banding hơn. Đường cong áp cho mọi luồng, nên nhánh preview phải chạy FM-Log → 709 + look, còn nhánh ghi không gắn effect. Chỉ dùng khi máy báo có `CONTRAST_CURVE` và spike thấy ISP thật sự áp nó cho luồng video ⚠.
+- **Qua ISP (ưu tiên):** đặt `CaptureRequest.TONEMAP_MODE = TONEMAP_MODE_CONTRAST_CURVE` và `TONEMAP_CURVE` lấy mẫu FM-Log (tối đa `TONEMAP_MAX_CURVE_POINTS`, thường ≥ 64 ⚠) qua `Camera2CameraControl` mà lõi mở ở FLC-E01-29. ISP áp đường cong ở độ chính xác cao trước khi lượng tử 8-bit, nên ít banding hơn. Đường cong áp cho mọi luồng, nên nhánh preview phải chạy FM-Log → 709 + look, còn nhánh ghi không gắn effect. Chỉ dùng khi máy báo có `CONTRAST_CURVE` và spike thấy ISP thật sự áp nó cho luồng video ⚠.
 - **Qua GPU (dự phòng):** nhánh ghi tuyến tính hóa luồng Rec.709 (ngược OETF), áp FM-Log, thêm dither blue-noise ±0,5 LSB. Đường cong và vai sáng của ISP đã nằm trong dữ liệu nên độ mềm vùng sáng kém hơn cách ISP. Sidecar ghi `path: gpu` để phân biệt.
 
 **LUT kỹ thuật** (sinh bằng code từ công thức, 33³ và 65³, manifest `owned`, miễn phí, tải được từ app và web): `FM-Log_to_Rec709_Neutral.cube` (FM-Log ngược rồi OETF Rec.709) và `FM-Log_to_Rec709_Contrast.cube` (thêm đường cong S nhẹ giống ảnh mặc định của điện thoại). HLG → Rec.709 theo BT.2408 ⚠. Trong FilCam, LUT kỹ thuật vào `inputTransform` và được gộp với look thành một texture (FLC-E01-20).
@@ -289,7 +289,7 @@ Checklist mỗi bản: quay 1080p và 4K 10 phút, đổi look khi quay, ghi s�
 
 **Năng lực và chính sách.** `CameraCapabilities` của lõi cộng phần dò riêng cho video (mức Camera2, fps theo kích thước, encoder HEVC/Main10 và bitrate tối đa, `TONEMAP`, kết quả `isSessionConfigSupported` cho các cấu hình FilCam). Bảng chính sách (FCM-E07-02) quyết định 4K, 60 fps, ghi sạch, nội suy, grain/halation, FM-Log, HLG theo tier; remote config chặn hoặc mở từng tính năng theo model (kill switch) mà không cần phát hành bản mới.
 
-**Nhiệt và pin khi quay** (`PowerManager.addThermalStatusListener`, `getThermalHeadroom` từ API 30):
+**Nhiệt và pin khi quay** (`PowerManager.addThermalStatusListener`, `getThermalHeadroom` từ API 30; tier và nhiệt nền ở FLC-E05-04, callback `CRITICAL` và dự báo headroom ở FLC-E05-10):
 
 | Trạng thái | FilCam làm gì |
 |---|---|
@@ -303,7 +303,7 @@ Checklist mỗi bản: quay 1080p và 4K 10 phút, đổi look khi quay, ghi s�
 
 **Danh sách máy công khai (V1)** ở `filmode.app/filcam/devices` ⚠: model, tier, 1080p LUT, 4K LUT, ghi sạch, FM-Log, HLG, lỗi đã biết, trạng thái "Đã kiểm", "Người dùng báo chạy", "Chưa kiểm". Script sinh trang từ kết quả ma trận và dữ liệu năng lực ẩn danh (tắt được), cập nhật mỗi bản phát hành.
 
-**Báo lỗi theo máy ngay trong app (MVP).** Màn "Máy của bạn" liệt kê tính năng có/không kèm lý do. Nút "Báo lỗi máy này" gửi model, SoC, bản Android, tier, bảng năng lực, cấu hình phiên camera cuối và 200 dòng log; không ảnh, không video, không đường dẫn hay tên file. Gửi qua backend của lõi (FLC-E08-02) ⚠; offline thì xếp hàng. Dữ liệu này cộng Crashlytics (khóa model, tier) cho ra bảng crash và quay lỗi theo hãng, là mốc đo của Bảng 13.
+**Báo lỗi theo máy ngay trong app (MVP).** Màn "Máy của bạn" liệt kê tính năng có/không kèm lý do. Nút "Báo lỗi máy này" gửi model, SoC, bản Android, tier, bảng năng lực, cấu hình phiên camera cuối và 200 dòng log; không ảnh, không video, không đường dẫn hay tên file. Gửi qua endpoint báo lỗi của lõi (FLC-E08-04) ⚠; offline thì xếp hàng. Dữ liệu này cộng Crashlytics (khóa model, tier) cho ra bảng crash và quay lỗi theo hãng, là mốc đo của Bảng 13.
 
 ### 5.9 Hướng dẫn (FCM-E09)
 
@@ -424,7 +424,7 @@ Mốc đo của Bảng 13 cho FilCam: **tỉ lệ crash theo hãng máy** và **
 | Chính sách Play cho foreground service (`mediaProcessing`, `dataSync`) ⚠ | Hàng đợi xuất bị từ chối khi review | Khai đúng loại trong manifest và Play Console; chỉ chạy khi người dùng bấm xuất |
 | Nhãn hiệu trong listing, tên look, tên LUT kỹ thuật | Listing bị gỡ | `NameGuard`, lint của lõi; không dùng tên hãng trong tiêu đề, mô tả ngắn, ảnh chụp màn hình; tên LUT kỹ thuật mô tả định dạng ⚠ rà soát |
 | Người dùng cũ mất LUT, công thức hay Pro khi cập nhật lên bản dùng lõi | 1★, hoàn tiền | FLC-E02-03, FCM-E04-01, FCM-E08-01; test cập nhật trong FCM-E11-05; staged rollout |
-| Nguồn lực: FilCam trùng V1 của Filmode và Studio | Lỡ Q3/2027 | 2 dev Android riêng cho FilCam; cut-line ở [epics-features.md mục Nhân sự](epics-features.md#nhân-sự); V2 chỉ khi đạt mốc |
+| Nguồn lực: FilCam trùng V1 của Filmode và Studio; Q2/2027 cần 4 dev Android cho cả họ app | Lỡ Q3/2027 | 2 dev Android riêng cho FilCam (dev A, dev D; dev D phải được tuyển từ 4/1/2027); cut-line ở [epics-features.md mục Nhân sự](epics-features.md#nhân-sự); V2 chỉ khi đạt mốc |
 
 ## 12. Nội dung cần làm
 

@@ -14,8 +14,8 @@ Quy ước ID, ưu tiên, gói và ước tính theo [README chung](../README.md
 - **Vấn đề:** người thích "màu film" đọc công thức trên blog, Threads, TikTok rồi phải tự dò lại bằng Lightroom hay app Ảnh. Người đã mua preset (DNG, XMP) hay LUT (.cube) thì cần Lightroom Mobile hoặc app desktop để dùng. Muốn cả feed cùng một màu thì phải chỉnh từng ảnh.
 - **Cơ hội:** lượt tìm "fujifilm recipes" tăng 5,44 lần và "film simulation" 2,35 lần trong ba năm trước giai đoạn dữ liệu Google Trends bị nhiễu; trên YouTube, "fuji recipe" đạt đỉnh 5 năm tuần 14/6/2026 ([báo cáo, Bảng 1](../../../reports/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u.md)). Trên Google Play, mảng này còn mỏng: FujiStyle có 21.872 lượt cài, Fuji X Weekly 407.926. Darkroom, RNI Films và Dehancer không có bản Android. Fimii, một app preset film của lập trình viên độc lập, bán gói trọn đời $9.99 mà lên #11 top free iOS Việt Nam sau khoảng 7 tháng ([báo cáo, Bảng 3, 4](../../../reports/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u.md)).
 - **Lời hứa:** "Công thức màu film cho ảnh điện thoại. Quét QR là có màu. Nhập preset đã mua. Không quảng cáo, không watermark, mua đứt được."
-- **Nền tảng và lịch:** Android ra mắt cuối Q1/2027 (6 sprint từ 4/1/2027); iOS cuối Q2/2027, dựng trên `FilmodeCoreKit` và dùng lại trình sửa, Match Photo, bộ nhập .xmp của Filmode iOS khi được ⚠. Thị trường đợt 1: VN, ID; tiếng Anh cho US, SG, AU; JP.
-- **Nguồn lực:** MVP Android **68 ngày công** (lõi đã có). Cần **2 dev Android** trong Q1/2027; V1 gồm 58,5 ngày Android, web và backend cùng 37 ngày iOS trong Q2/2027 (xem [nhân sự](epics-features.md#nhân-sự)). MVP cần hai điều chỉnh nhỏ ở lõi (khoảng 3 ngày Android, [Điều chỉnh lõi](epics-features.md#điều-chỉnh-lõi) #1 và #2).
+- **Nền tảng và lịch:** Android (`app.filmode.studio`, đề xuất ⚠) ra mắt cuối Q1/2027 (6 sprint từ 4/1/2027, staged rollout từ 29/3); iOS nộp App Review chậm nhất 18/6/2027, ra mắt cuối Q2/2027, dựng trên `FilmodeCoreKit` và dùng lại trình sửa, Match Photo, bộ nhập .xmp của Filmode iOS khi được ⚠. Thị trường đợt 1: VN, ID; tiếng Anh cho US, SG, AU; JP.
+- **Nguồn lực:** MVP Android **68 ngày công** (lõi đã có). Cần **2 dev Android** trong Q1/2027; V1 gồm 58,5 ngày Android, web và backend cùng 37 ngày iOS trong Q2/2027 (xem [nhân sự](epics-features.md#nhân-sự)). MVP cần ba mục `V1` mới của lõi: FLC-E01-27, FLC-E01-28 (ba trường `adjust`) và FLC-E02-11 (tông nền dùng chung), khoảng 3,5 ngày Android, dev Studio làm trong S1–S2 ([Điều chỉnh lõi](epics-features.md#điều-chỉnh-lõi)). Hai dev Android là dev D (mới, từ 4/1/2027) và dev B của nhóm Filmode (từ 18/1/2027), theo [lịch cả họ app](../README.md#lịch-và-nhân-sự-cả-họ-app).
 
 ## 2. Vì sao là một app riêng
 
@@ -25,10 +25,15 @@ Quy ước ID, ưu tiên, gói và ước tính theo [README chung](../README.md
 
 **Rủi ro 4.3 "biến thể".** Apple siết guideline 4.3 từ 9/6/2026; ứng dụng "biến thể" của cùng nhà phát triển có thể bị từ chối ([MacRumors](https://www.macrumors.com/2026/06/09/app-store-guidelines-low-quality-apps/)). Filmode iOS hiện đã có trình sửa, Match Photo, nhập .cube và .xmp, "biến Match thành LUT" (Pro) và chỉnh hàng loạt ([hồ sơ Filmode](../../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/film_camera_apps.md)). Studio chỉ khác biệt rõ nếu:
 - Studio có những thứ Filmode không có: mô hình công thức theo thang máy ảnh, thẻ QR, dán công thức dạng chữ, bộ nhập zip/DNG có báo cáo, RAW máy ảnh, xuất LUT, trang công thức công khai, chợ creator.
-- Filmode giữ vai "máy ảnh + chỉnh nhanh" và thêm nút "Mở trong Filmode Studio" để chỉnh sâu (Bảng 10, A6.2). Trình sửa sâu của Filmode iOS không phát triển thêm ⚠ (người điều phối cần chốt với phần FMD).
+- Filmode giữ vai "máy ảnh + chỉnh nhanh" theo quy tắc ranh giới dưới đây.
 - Ghi chú App Review của Studio nêu các khác biệt đó (FMS-E12-14).
 
-Người đã mua Filmode Pro trên iOS giữ nguyên mọi tính năng đang có trong Filmode, kể cả Match thành LUT (cam kết không thu hồi của lõi, FLC-E03-04). Quyền Pro của Filmode và Studio là hai SKU riêng ⚠: không có tài khoản thì không cấp quyền chéo giữa hai package được.
+**Ranh giới Filmode ↔ Studio (đã chốt).** Quy tắc này giống hệt ở [README chung](../README.md#ranh-giới-giữa-các-app) và [README Filmode mục 3.3](../01-filmode/README.md#33-ranh-giới-với-filmode-studio-apple-43):
+
+- **Filmode là máy ảnh + chỉnh nhanh:** áp máy hoặc look cho ảnh có sẵn, chỉnh cơ bản, khung, áp hàng loạt, Match Photo để tạo look cho kính ngắm. Chỉnh sâu đi qua nút "Mở trong Filmode Studio" (A6.2, FMD-E06-06).
+- **Filmode iOS giữ mọi tính năng trình sửa người dùng đang có hoặc đã trả tiền** (trình sửa, Match Photo, Match → LUT, nhập .cube và .xmp, video 4K, chỉnh hàng loạt): giữ mãi, không gỡ, theo luật của Apple về tính năng đã trả tiền và cam kết không thu hồi (FLC-E03-04, FMD-E11-06). Filmode iOS không nhận thêm tính năng chỉnh sâu mới. Trình sửa đang có của Filmode Vibe trên Android (LUT, preset, curves, nhập .cube; FMD-E06-01) cũng được giữ như vậy.
+- **Mọi tính năng chỉnh sâu mới làm ở Studio**, trên cả Android và iOS: công thức theo thang máy ảnh, HSL, bánh xe màu, RAW, xuất LUT, parser công thức dạng chữ, cộng đồng. Filmode Android không thêm màn xuất .cube; look Match được gửi sang Studio để xuất (FMD-E11-05).
+- **Quyền Pro mua riêng từng app** (`fmd.*`, `fms.*`, `fcm.*`). Không có tài khoản thì không cấp quyền chéo giữa các package được. Gói chung nhiều app chỉ là phương án V2 ⚠, làm qua tài khoản tùy chọn; chưa có trong backlog.
 
 ## 3. Người dùng mục tiêu và việc cần làm
 
@@ -89,14 +94,14 @@ Trình sửa không phá hủy ảnh gốc. Trạng thái sửa của một ản
 
 | # | Tham số trên app | Thang | Khóa trong công thức gốc | Trường `look.json` | Pass GPU | Ghi chú |
 |---|---|---|---|---|---|---|
-| 1 | Tông nền | 16 lựa chọn (bảng dưới) | Film Simulation | `base.ref = "fm:base/<slug>@<rev>"` | LUT 3D 33³: trilinear khi preview, tetrahedral khi xuất | Quyết định đường cong và bảng màu. Tông nền dùng chung ba app (Điều chỉnh lõi #2) |
+| 1 | Tông nền | 16 lựa chọn (bảng dưới) | Film Simulation | `base.ref = "fm:base/<slug>@<rev>"` | LUT 3D 33³: trilinear khi preview, tetrahedral khi xuất | Quyết định đường cong và bảng màu. Tông nền dùng chung ba app (FLC-E02-11) |
 | 2 | Hạt: độ mạnh | Tắt / Nhẹ / Mạnh | Grain Effect (Off/Weak/Strong) | `grain.amount` 0 / 0,22 / 0,40 | Pass grain (FLC-E01-12) | Grain mạnh ở vùng trung tính, gần như không có ở bóng sâu và vùng cháy |
 | 3 | Hạt: kích thước | Nhỏ / Lớn | Grain size (Small/Large) | `grain.size` 1,0 / 1,8; `grain.roughness` 0,5 / 0,7 | Pass grain | `size` tính ở ảnh chuẩn 12 MP; seed theo ảnh để preview giống ảnh xuất |
-| 4 | Độ sâu màu | Tắt / Nhẹ / Mạnh | Color Chrome Effect | `adjust.colorDepth` 0 / 0,5 / 1 (trường mới, Điều chỉnh lõi #1) | Pass `adjust`: giảm độ sáng theo trọng số độ bão hòa, trước LUT | Màu đậm (đỏ, cam, xanh lá) có chiều sâu hơn, không bị bệt |
-| 5 | Độ sâu xanh lam | Tắt / Nhẹ / Mạnh | Color Chrome FX Blue | `adjust.colorDepthBlue` 0 / 0,5 / 1 (trường mới) | Pass `adjust`: như trên, mask theo sắc độ khoảng 200–260° | Trời và nước xanh đậm hơn |
+| 4 | Độ sâu màu | Tắt / Nhẹ / Mạnh | Color Chrome Effect | `adjust.colorDepth` 0 / 0,5 / 1 (trường mới, FLC-E01-27) | Pass `adjust`: giảm độ sáng theo trọng số độ bão hòa, trước LUT | Màu đậm (đỏ, cam, xanh lá) có chiều sâu hơn, không bị bệt |
+| 5 | Độ sâu xanh lam | Tắt / Nhẹ / Mạnh | Color Chrome FX Blue | `adjust.colorDepthBlue` 0 / 0,5 / 1 (trường mới, FLC-E01-27) | Pass `adjust`: như trên, mask theo sắc độ khoảng 200–260° | Trời và nước xanh đậm hơn |
 | 6 | Kiểu cân bằng trắng | Tự động, Nắng, Râm, Đèn sợi đốt, Huỳnh quang, Kelvin 2500–10000 K | White Balance | `adjust.temperature`, `adjust.tint` (dịch tương đối); RAW dùng Kelvin tuyệt đối trong `x-fms.recipe.wbKelvin` | Pass `adjust`: ma trận 3×3 trước LUT | Ảnh JPEG đã được máy cân trắng, nên chỉ dịch tương đối so với 5500 K ⚠ |
 | 7 | Lệch cân bằng trắng | Đỏ −9…+9, Xanh lam −9…+9 | WB Shift R/B | `adjust.wbShift {r, b}` (đúng thang) | Pass `adjust`: nhân kênh R và B trước LUT | Hiện bằng lưới 19×19 như trên máy ảnh |
-| 8 | Dải động | 100 / 200 / 400 | Dynamic Range (DR100/200/400) | `adjust.toneRange` 0 / 0,5 / 1 (trường mới) | Pass `adjust`: vai mềm ở vùng sáng, giữ chi tiết mây và da sáng | Không đổi phơi sáng chung |
+| 8 | Dải động | 100 / 200 / 400 | Dynamic Range (DR100/200/400) | `adjust.toneRange` 0 / 0,5 / 1 (trường mới, FLC-E01-27) | Pass `adjust`: vai mềm ở vùng sáng, giữ chi tiết mây và da sáng | Không đổi phơi sáng chung |
 | 9 | Vùng sáng | −2…+4 | Highlight (Tone) | `adjust.highlights` = nấc × 18 | Pass `adjust` | Dương là vùng sáng sáng hơn, cứng hơn |
 | 10 | Vùng tối | −2…+4 | Shadow (Tone) | `adjust.shadows` = nấc × −18 | Pass `adjust` | Dương là vùng tối sâu hơn, nên đổi dấu |
 | 11 | Màu | −4…+4 | Color | `adjust.saturation` = nấc × 12 | Pass `adjust` | |
@@ -110,7 +115,7 @@ ISO và các dòng khác trong công thức gốc (ví dụ "ISO: Auto up to 640
 
 Thứ tự pass do lõi cố định (FLC-E01-11): `adjust` (WB và lệch WB → phơi sáng → dải động → vùng sáng/tối → độ sâu màu → bão hòa → độ nét, độ trong) → LUT tông nền (hoặc LUT đã bake) → halation, bloom → grain → vignette, CA → khung. Giữ tông da (5.5) trộn ảnh gốc và ảnh có look theo mask sau cùng.
 
-**16 tông nền.** LUT 33³ do đội tự dựng từ ColorChecker và ramp xám, manifest nguồn gốc `owned` (FLC-E04-03). Tên và mô tả không nhắc tên phim hay máy ảnh nào.
+**16 tông nền.** LUT 33³ do đội tự dựng từ ColorChecker và ramp xám, manifest nguồn gốc `owned` (FLC-E04-03). Tên và mô tả không nhắc tên phim hay máy ảnh nào. Tên tiếng Anh "Classic Negative" và "Nostalgic Negative" gần với tên chế độ màu của một hãng máy ảnh ⚠: rà nhãn hiệu trước khi chốt, nếu là nhãn hiệu thì đổi tên và thêm vào `NameGuard` (FLC-E04-02).
 
 | Slug | Tên (VI) | Tên (EN) | Phong cách |
 |---|---|---|---|
@@ -209,7 +214,7 @@ Parser phải xử lý:
 - **Khóa và từ đồng nghĩa (EN, VI, viết tắt):** Film Simulation / Film sim / FS; Grain Effect / Grain / Hạt; Color Chrome Effect / CCE / Độ sâu màu; Color Chrome FX Blue / CCFxB / CC Blue; White Balance / WB / Cân bằng trắng; WB Shift; Dynamic Range / DR / Dải động; Highlight / H / Hi / Vùng sáng; Shadow / S / Sh / Vùng tối; Color / Col / Màu; Sharpness / Sharp / Độ nét; High ISO NR / NR / Giảm nhiễu; Clarity / Độ trong; Exposure Compensation / EV / Bù sáng; ISO; Tone Curve (dạng "H-1 S+2").
 - **Giá trị:** số có dấu (+2, −1, "-1" với dấu trừ Unicode), phân số (+1/3, +2/3), khoảng ("+1/3 to +1" lấy giữa), chữ (Off/Weak/Strong, Small/Large, tắt/yếu/nhẹ/mạnh, nhỏ/lớn), Kelvin ("5500K"), DR ("DR400", "400%", "DR-Auto" → 200).
 - **Lệch WB:** "+3 Red & -5 Blue", "R+3 B-5", "R: +3, B: -5", "(+3R, -5B)", "Red 3, Blue -5".
-- **Tên kiểu nền:** bảng map nội bộ từ tên phổ biến sang 16 tông nền (ví dụ "Classic Negative" → `neg-classic`, "Nostalgic Neg" → `neg-nostalgic`, "Eterna" → `cine-soft`). Bảng map là dữ liệu nhận đầu vào, không bao giờ hiện trên UI; UI chỉ hiện tên tự đặt ("Âm bản cổ điển"). Lint tên của lõi (FLC-E04-03) phải cho phép riêng file này ⚠.
+- **Tên kiểu nền:** bảng map nội bộ từ tên phổ biến sang 16 tông nền (ví dụ "Classic Negative" → `neg-classic`, "Nostalgic Neg" → `neg-nostalgic`, "Eterna" → `cine-soft`). Bảng map là dữ liệu nhận đầu vào, không bao giờ hiện trên UI; UI chỉ hiện tên tự đặt ("Âm bản cổ điển"). Lint tên của lõi cho phép riêng file này qua danh sách ngoại lệ có lý do (FLC-E04-03).
 - **Định dạng:** gạch đầu dòng, emoji, dấu `|`, `·`, `/`, dấu hai chấm toàn khổ, có dấu hoặc không dấu ("do net"), nhiều tham số trên một dòng, dòng tiêu đề đầu bài làm tên công thức (qua `NameGuard` trước khi chia sẻ).
 - **Đầu ra:** công thức kèm độ tin cậy từng dòng, danh sách dòng chưa nhận; không đoán giá trị cho dòng không hiểu. Mục tiêu ≥ 95% trường đúng trên bộ 60 bài mẫu.
 
@@ -227,7 +232,7 @@ Parser phải xử lý:
 Một màn nhập nhận nhiều file hoặc một zip, từ trình chọn file hay từ share sheet (Zalo, Messenger, Drive). Bộ nhập là của lõi: .cube 17/33/65 và preset kiểu Lightroom (FLC-E01-04), HALD, .3dl, zip (FLC-E01-05), .xmp và preset .dng (FLC-E01-08). Studio thêm:
 - **Báo cáo:** từng file thành công hay lỗi, lý do, phần không chuyển được (làm nét, khử nhiễu, mask, lens profile, dehaze). XMP → LUT là bản gần đúng; app nói rõ điều này.
 - **Gói đã mua:** giải nén một cấp zip lồng, bỏ rác (`__MACOSX`, PDF, ảnh hướng dẫn), gom vào thư mục tên gói. File .dng là ảnh RAW thì mở trong trình sửa thay vì báo lỗi.
-- **Bảo vệ LUT của người khác:** look nhập được gắn `license: personal`. Look này chỉ dùng riêng: chia sẻ chỉ gửi được phần công thức, không công khai, không xuất .cube. Lõi chặn thêm ở server (Điều chỉnh lõi #4).
+- **Bảo vệ LUT của người khác:** look nhập được gắn `license: personal`. Look này chỉ dùng riêng: chia sẻ chỉ gửi được phần công thức, không công khai, không xuất .cube. Lõi chặn thêm ở server (FLC-E08-03).
 - **Thư viện:** thư mục, thẻ, yêu thích, tìm kiếm; lưới xem trước mọi look trên chính ảnh của người dùng; từ V1 thấy cả look lưu trong Filmode và FilCam trên cùng máy.
 
 ### 5.4 Sao chép màu từ ảnh mẫu (FMS-E04)
@@ -405,16 +410,16 @@ Ngưỡng có nguồn lấy từ RevenueCat qua báo cáo (Bảng 7); ngưỡng 
 | Rủi ro | Ảnh hưởng | Cách xử lý |
 |---|---|---|
 | Nhãn hiệu trong tên công thức, tên tông nền, metadata (Kodak, Portra, Fujifilm, Classic Chrome, Velvia…). Kodak đã đổi Portra thành "Ektacolor Pro" 3/2026; Play cấm dùng nhãn hiệu gây nhầm lẫn | App bị gỡ, listing bị từ chối | Tên tự đặt cho mọi thứ; `NameGuard` trong app và server (FLC-E04-02, FLC-E08-03); lint CI (FLC-E04-03); bảng map tên kiểu nền của parser chỉ nhận đầu vào, không hiện trên UI ⚠ |
-| Người dùng nhập gói preset/LUT trả phí (Gumroad, Etsy, "mua chung" trên Voz) rồi phát tán lại qua app | Khiếu nại bản quyền, gỡ app | Look nhập mang `license: personal`: chỉ chia sẻ phần công thức, không công khai, không xuất .cube (FMS-E03-05); server chặn (Điều chỉnh lõi #4); quy trình gỡ theo khiếu nại (FMS-E08-08); không bao giờ lưu LUT của người khác trên server |
+| Người dùng nhập gói preset/LUT trả phí (Gumroad, Etsy, "mua chung" trên Voz) rồi phát tán lại qua app | Khiếu nại bản quyền, gỡ app | Look nhập mang `license: personal`: chỉ chia sẻ phần công thức, không công khai, không xuất .cube (FMS-E03-05); server chặn (FLC-E08-03); quy trình gỡ theo khiếu nại (FMS-E08-08); không bao giờ lưu LUT của người khác trên server |
 | Văn bản công thức trên blog có bản quyền của tác giả | Khiếu nại từ tác giả công thức | Parser chỉ lấy tham số, không lưu hay tải văn bản gốc; trang công khai chỉ hiện tham số và ảnh của người đăng |
 | LUT mã nguồn mở share-alike (RawTherapee CC BY-SA, G'MIC CeCILL) lọt vào gói của đội hoặc gói creator | Phải mở giấy phép cho LUT của mình, hoặc vi phạm | Tông nền và công thức tự dựng có manifest `owned`; lint so checksum HaldCLUT công khai (FLC-E04-03, FMS-E09-03) |
 | Giấy phép mô hình AI (Neural Preset, Deep Analog chưa ghi giấy phép), mô hình mask bầu trời, LibRaw (LGPL-2.1 hoặc CDDL) | Không dùng thương mại được, hoặc phải công bố mã | Spike giấy phép trước khi code (FMS-E04-04, FMS-E05-03, FMS-E01-12); phương án tự huấn luyện (FMS-E04-05); LibRaw liên kết động nếu dùng LGPL ⚠ |
 | Chợ creator: chính sách store về chia doanh thu ngoài store, thuế TNCN khi trả cho cá nhân VN, chi trả ra nước ngoài, hoàn tiền và gian lận | Bị store từ chối, sai thuế, lỗ vì hoàn tiền | Chỉ bán qua IAP; spike luồng tiền và rà pháp lý (FMS-E09-01); giữ 45 ngày; khấu trừ thuế và chứng từ; chỉ mở khi đạt điều kiện ở mục 10 |
-| Apple 4.3 coi Studio là biến thể của Filmode iOS (cùng có trình sửa, Match Photo, nhập .xmp) | Studio iOS bị từ chối | Tính năng riêng rõ (công thức, QR, parser, RAW máy ảnh, xuất LUT, cộng đồng); Filmode giữ vai máy ảnh và nút "Mở trong Studio"; ghi chú App Review (FMS-E12-14) |
+| Apple 4.3 coi Studio là biến thể của Filmode iOS (cùng có trình sửa, Match Photo, nhập .xmp) | Studio iOS bị từ chối | Tính năng riêng rõ (công thức, QR, parser, RAW máy ảnh, xuất LUT, cộng đồng); quy tắc ranh giới ở mục 2: Filmode giữ vai máy ảnh + chỉnh nhanh, giữ tính năng cũ nhưng không thêm chỉnh sâu mới, có nút "Mở trong Filmode Studio"; ghi chú App Review (FMS-E12-14) |
 | Studio và Filmode tranh nhau người dùng và doanh thu | Doanh thu mỗi app thấp | Mỗi app một bộ từ khóa; Filmode đẩy người cần chỉnh sâu sang Studio; look đi lại giữa hai app nhờ định dạng chung |
 | Fimii đã chiếm "preset" ở VN với giá 263.000 ₫ trọn đời; Snapseed miễn phí có film simulation, halation, RAW | Khó chuyển đổi ở VN | Cạnh tranh bằng công thức và QR, nhập preset, xuất LUT, gói Free rộng; thử giá 199.000 ₫ |
-| Công thức quét QR trong Filmode hoặc FilCam ra màu khác Studio | Mất niềm tin vào vòng lặp chia sẻ | Điều chỉnh lõi #1 và #2 trước S2; golden test QR round-trip (FMS-E13-02) |
-| MVP phụ thuộc mục `V1` của lõi và Match v1 (FLC-E01-18) nằm trong cut-line của lõi | Trễ ra mắt Q1/2027 | Người điều phối giữ FLC-E01-18 trong MVP lõi; các mục lõi "cần cho FMS" xong trước S1 |
+| Công thức quét QR trong Filmode hoặc FilCam ra màu khác Studio | Mất niềm tin vào vòng lặp chia sẻ | FLC-E01-27, FLC-E01-28 và FLC-E02-11 xong trước S2 (18/1/2027); golden test QR round-trip (FMS-E13-02) |
+| MVP phụ thuộc mục `V1` của lõi (FLC-E01-27, -28, FLC-E02-11, bộ nhập, deep link, Ultra HDR) và Match v1 (FLC-E01-18) nằm trong cut-line của lõi | Trễ ra mắt Q1/2027 | Lõi giao theo hạn từng sprint FMS ([lõi mục 8](../filmode-core.md#8-lộ-trình)); nếu cắt FLC-E01-18 khỏi MVP của Filmode thì vẫn giao trước FMS S5 (1/3/2027); dev D làm FLC-E01-27, -28 trong S1–S2 |
 | Ảnh 50–200 MP và RAW trên máy Android tầm trung (bộ nhớ, thời gian) | OOM, đánh giá 1★ | Render theo tile (FLC-E01-15); ma trận máy (FMS-E13-03); RAW là V1 sau spike |
 | Số liệu thị trường: chưa có lượt tìm tuyệt đối, doanh thu là ước tính Sensor Tower, bảng xếp hạng là ảnh chụp một ngày | Chọn sai tiêu đề hoặc sai thị trường | Thuê công cụ ASO một tháng; thử nghiệm listing trên Play; quyết định theo KPI mục 10 |
 

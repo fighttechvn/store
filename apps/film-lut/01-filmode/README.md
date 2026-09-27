@@ -2,7 +2,7 @@
 
 Filmode là app chụp ảnh "có vibe" cho Gen Z: mở app là vào kính ngắm của một chiếc máy có tính cách (digicam CCD đầu 2000, máy phim ngắm-chụp, máy dùng một lần, máy lấy liền, máy đồ chơi, điện thoại đời đầu, máy quay DV), mỗi máy có một **hiệu ứng chữ ký** đủ lạ để khoe lên TikTok. App có ảnh động thật cho Android, cuộn phim tráng trễ và **chế độ sự kiện** cho đám cưới, bữa tiệc (khách quét QR, chụp trong trình duyệt, không cài app).
 
-App dựng lại trên [Filmode Core](../filmode-core.md) (`FLC`) từ hai listing đang có: **Filmode Vibe** trên Google Play (`app.filmode`) và **Filmode - Film & LUT Editor** trên App Store (id 6791145420, bundle `app.filmode`). Quy ước ID, ưu tiên, gói và ước tính theo [README chung](../README.md). Nguồn: [báo cáo](../../reports/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u.md) mục "App 1 — Filmode" và Bảng 8, 10, 13; ghi chú nghiên cứu trong `research_notes/App camera film và LUT màu/`.
+App dựng lại trên [Filmode Core](../filmode-core.md) (`FLC`) từ hai listing đang có: **Filmode Vibe** trên Google Play (`app.filmode`) và **Filmode - Film & LUT Editor** trên App Store (id 6791145420, bundle `app.filmode`). Quy ước ID, ưu tiên, gói và ước tính theo [README chung](../README.md). Nguồn: [báo cáo](../../../reports/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u.md) mục "App 1 — Filmode" và Bảng 8, 10, 13; ghi chú nghiên cứu trong `research_notes/App camera film và LUT màu/`.
 
 | File | Nội dung |
 |---|---|
@@ -15,13 +15,13 @@ App dựng lại trên [Filmode Core](../filmode-core.md) (`FLC`) từ hai listi
 - **Cơ hội:** "digicam" tăng 5,96 lần toàn cầu (19 lần ở Mỹ, 13,7 lần ở Indonesia) và đang ở đỉnh 5 năm vào T8–9/2026. Việt Nam có 8 app màu film trong top 100 grossing iOS. POV cho thấy app sự kiện thu $80k/tháng chỉ từ 100 nghìn lượt tải Android.
 - **Lời hứa:** "Máy digicam và film thật sự cho điện thoại của bạn. Không quảng cáo, không watermark, thử mọi máy trước khi trả tiền, không bao giờ lấy lại thứ đã cho."
 - **Hiện trạng:** kỹ thuật khó nhất đã có (LUT 64³ trên GPU ngay kính ngắm, 10 hiệu ứng thời gian thực, tách nền người, Cloud Boards). Phân phối gần như bằng 0: 69 lượt cài trên Play, xếp nhầm danh mục Productivity, không vào top 30 từ khóa nào.
-- **Lịch:** giai đoạn 0 (sửa nền) 5–23/10/2026; bản dựng lại trên lõi 26/10/2026 – 15/1/2027, ra mắt 18/1/2027 kịp Tết Nguyên đán (Mùng 1 Tết là 6/2/2027); chế độ sự kiện và pilot ở mùa cưới sau Tết (T2–T4/2027); Filmode iOS chuyển sang lõi Q2/2027.
+- **Lịch:** giai đoạn 0 (sửa nền) 5–23/10/2026; bản dựng lại trên lõi 26/10/2026 – 15/1/2027, ra mắt 18/1/2027 kịp Tết Nguyên đán (Mùng 1 Tết là 6/2/2027). Chế độ sự kiện dời sang V1, **lệch Bảng 13** (lý do ở mục 4.7): lát cắt sự kiện 15/2 – 26/3/2027, pilot 3–5 đám cưới hoặc tiệc thật trong T3–T4/2027. Filmode iOS chuyển sang lõi T3–T4/2027; phần iOS V1 còn lại T7–T8/2027 ([lịch cả họ app](../README.md#lịch-và-nhân-sự-cả-họ-app)).
 - **Khối lượng:** 123 feature, **219,5 ngày công**: Có sẵn 8,5, MVP 95, V1 109, V2 7. Android 137,5 ngày, iOS 37 ngày, web/backend/công cụ/QA 45 ngày. Lõi tính riêng ở [filmode-core.md](../filmode-core.md).
-- **Nguồn lực:** MVP của app cộng MVP của lõi vượt sức 3 dev Android trong 12 tuần; cần 3 dev Android + 1 dev hợp đồng 8 tuần, hoặc 3 dev và áp cut-line ([epics-features.md, mục Nhân sự](epics-features.md#nhân-sự)).
+- **Nguồn lực:** trong S1–S6, lõi (94 ngày) cộng phần Android và công cụ của app (92,5 ngày) là 186,5 ngày, vượt 177 ngày danh nghĩa của 3 dev Android trong 12 tuần. Cần 3 dev Android + 1 dev hợp đồng khoảng 8 tuần + tester thiết bị 50% + dev iOS 50%, hoặc 3 dev và áp cut-line. Chỉ có 2 dev thì làm gói Tết trên code cũ và phát hành bản dựng lại T3/2027 ([epics-features.md, mục Nhân sự](epics-features.md#nhân-sự)).
 
 ## 2. Hiện trạng
 
-Số liệu ngày 27/9/2026 từ [hồ sơ Filmode trong ghi chú nghiên cứu](../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/film_camera_apps.md) và Bảng 5 của báo cáo.
+Số liệu ngày 27/9/2026 từ [hồ sơ Filmode trong ghi chú nghiên cứu](../../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/film_camera_apps.md) và Bảng 5 của báo cáo.
 
 | | Filmode Vibe (Android) | Filmode (iOS) |
 |---|---|---|
@@ -37,7 +37,7 @@ Số liệu ngày 27/9/2026 từ [hồ sơ Filmode trong ghi chú nghiên cứu]
 | Quyền riêng tư | Không quảng cáo; Data safety khai tùy chọn: tên, email, ID người dùng, tương tác, nội dung người dùng tạo, ảnh, lịch sử mua, ID thiết bị | — |
 | Vấn đề | Lỗi "không lưu được ảnh" (đánh giá 8/9/2026; dev trả lời bản 1.5.0 đã sửa); tên khung "Polaroid" là nhãn hiệu; sai danh mục | Nội dung khác xa bản Android; giá VN đắt gấp 3–5 lần các app dẫn đầu |
 
-**Khoảng lệch Android và iOS.** Android thiếu 200+ look, cuộn phim, Match Photo, .xmp, video 4K, hàng loạt, pass sự kiện. iOS thiếu kiểu máy, hiệu ứng thời gian thực, photobooth và board ⚠ (chưa rõ iOS có board). FMD-E11 đóng khoảng lệch: look, Match, cuộn sang Android ở MVP; máy và hiệu ứng sang iOS khi iOS chuyển lõi (V1).
+**Khoảng lệch Android và iOS.** Android thiếu 200+ look, cuộn phim, Match Photo, .xmp, video 4K, hàng loạt, pass sự kiện. iOS thiếu kiểu máy, hiệu ứng thời gian thực, photobooth và board ⚠ (chưa rõ iOS có board). FMD-E11 đóng khoảng lệch: look, Match, cuộn sang Android ở MVP; máy và hiệu ứng sang iOS khi iOS chuyển lõi (V1). Nhập .xmp và xuất .cube không sang Filmode Android mà nằm ở Studio (mục 3.3).
 
 ## 3. Người dùng mục tiêu, việc cần làm và định vị
 
@@ -55,7 +55,7 @@ Số liệu ngày 27/9/2026 từ [hồ sơ Filmode trong ghi chú nghiên cứu]
 
 ### 3.2 Đối thủ và khác biệt
 
-Số liệu từ Bảng 2, 6 và 7 của báo cáo và [ghi chú đối thủ](../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/film_camera_apps.md) (ST = ước tính Sensor Tower cho tháng gần nhất; lượt cài Play là số chính xác ngày 27/9/2026).
+Số liệu từ Bảng 2, 6 và 7 của báo cáo và [ghi chú đối thủ](../../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/film_camera_apps.md) (ST = ước tính Sensor Tower cho tháng gần nhất; lượt cài Play là số chính xác ngày 27/9/2026).
 
 | App | Lượt cài Play, điểm | ST tháng: Android / iOS | Giá (US; VN) | Điểm yếu mình khai thác | Filmode khác gì |
 |---|---|---|---|---|---|
@@ -70,6 +70,15 @@ Số liệu từ Bảng 2, 6 và 7 của báo cáo và [ghi chú đối thủ](.
 **Câu định vị:** "Máy ảnh digicam và film cho Android và iPhone: thử mọi máy ngay trên kính ngắm, ảnh động thật, không quảng cáo, không watermark, mua đứt được."
 
 **Không làm:** dùng tên Dazz, Kodak, Fuji, Polaroid, Instax, Canon, Leica, Contax, Lomo, Holga ở tên máy, look, khung hay listing; quảng cáo; watermark; AI sinh ảnh; bắt tài khoản (trừ chủ tiệc); đăng nhập bằng OTP số điện thoại; mạng xã hội có feed (bài học Lapse).
+
+### 3.3 Ranh giới với Filmode Studio (Apple 4.3)
+
+Apple siết guideline 4.3 từ 9/6/2026: app "biến thể" của cùng nhà phát triển có thể bị từ chối. Filmode iOS đã có trình sửa, nên ranh giới với Studio phải rõ. Quy tắc này giống hệt ở [README chung](../README.md#ranh-giới-giữa-các-app) và [README Studio](../02-filmode-studio/README.md#2-vì-sao-là-một-app-riêng):
+
+- **Filmode là máy ảnh + chỉnh nhanh:** áp máy hoặc look cho ảnh có sẵn, chỉnh cơ bản, khung, áp hàng loạt, Match Photo để tạo look cho kính ngắm. Chỉnh sâu đi qua nút "Mở trong Filmode Studio" (A6.2, FMD-E06-06).
+- **Filmode iOS giữ mọi tính năng trình sửa người dùng đang có hoặc đã trả tiền** (trình sửa, Match Photo, Match → LUT, nhập .cube và .xmp, video 4K, chỉnh hàng loạt): giữ mãi, không gỡ, theo luật của Apple về tính năng đã trả tiền và cam kết không thu hồi (FLC-E03-04, FMD-E11-06). Filmode iOS không nhận thêm tính năng chỉnh sâu mới. Trình sửa đang có của Filmode Vibe trên Android (LUT, preset, curves, nhập .cube; FMD-E06-01) cũng được giữ như vậy.
+- **Mọi tính năng chỉnh sâu mới làm ở Studio**, trên cả Android và iOS: công thức theo thang máy ảnh, HSL, bánh xe màu, RAW, xuất LUT, parser công thức dạng chữ, cộng đồng. Filmode Android không thêm màn xuất .cube; look Match được gửi sang Studio để xuất (FMD-E11-05).
+- **Quyền Pro mua riêng từng app** (`fmd.*`, `fms.*`, `fcm.*`). Không có tài khoản thì không cấp quyền chéo giữa các package được. Gói chung nhiều app chỉ là phương án V2 ⚠, làm qua tài khoản tùy chọn; chưa có trong backlog.
 
 ## 4. Mô tả tính năng chi tiết
 
@@ -126,9 +135,11 @@ Chọn máy và cuộn 12 kiểu (Free) hoặc 24/36 (Pro); kính ngắm đếm 
 
 ### 4.6 Nhập ảnh và chỉnh nhanh (A6)
 
-Chọn ảnh qua Photo Picker (không `READ_MEDIA_*`), áp máy hoặc look, date stamp lấy giờ EXIF. Hàng loạt: 5 ảnh mỗi lượt Free, 100 ảnh Pro. Chỉnh cơ bản (phơi sáng, nhiệt độ màu, tint, tương phản, cường độ, cắt). Trình sửa và nhập .cube, preset đang có vẫn miễn phí. Khung: 7 khung cũ (khung "Polaroid" đổi tên thành "Instant") + Film strip miễn phí, 6 khung Pro. Photobooth tách nền giữ nguyên, V1 chuyển sang `:core:segment` và thêm dải 4 ảnh đếm ngược. Chỉnh sâu thuộc Filmode Studio (nút "Mở trong Filmode Studio", V1).
+Chọn ảnh qua Photo Picker (không `READ_MEDIA_*`), áp máy hoặc look, date stamp lấy giờ EXIF. Hàng loạt: 5 ảnh mỗi lượt Free, 100 ảnh Pro. Chỉnh cơ bản (phơi sáng, nhiệt độ màu, tint, tương phản, cường độ, cắt). Trình sửa và nhập .cube, preset đang có vẫn miễn phí và được giữ. Khung: 7 khung cũ (khung "Polaroid" đổi tên thành "Instant") + Film strip miễn phí, 6 khung Pro. Photobooth tách nền giữ nguyên, V1 chuyển sang `:core:segment` và thêm dải 4 ảnh đếm ngược. Chỉnh sâu thuộc Filmode Studio (nút "Mở trong Filmode Studio", V1), theo quy tắc ranh giới ở mục 3.3.
 
 ### 4.7 Chế độ sự kiện (A7)
+
+**Lệch Bảng 13.** Bảng 13 của báo cáo đặt "chế độ sự kiện chạy trên web" trong giai đoạn 1 (T10/2026–T1/2027). Filmode dời cả chế độ sự kiện sang V1: lát cắt đủ dùng làm 15/2 – 26/3/2027, rồi pilot 3–5 đám cưới hoặc tiệc thật trong T3–T4/2027 (FMD-E07-17); phần còn lại chỉ làm khi pilot đạt ngưỡng ở mục 9. Lý do: (1) giai đoạn 1 đã vượt sức 3 dev Android chỉ với bản dựng lại và gói Tết; (2) phần lõi sự kiện cần (WebGL2 FLC-E01-23, xác minh pass và sự kiện thử FLC-E03-10, backend FLC-E08-02) là `V1`, hạn 15/2/2027; (3) báo cáo ghi chưa có dữ liệu nhu cầu app sự kiện ở Việt Nam, nên phải thử nhỏ trước khi đầu tư lớn; (4) mùa cưới sau Tết (T3–T4) là lúc chạy pilot. README chung ghi cùng chỗ lệch này.
 
 **Luồng đầy đủ**
 
@@ -165,8 +176,8 @@ Pin-board cục bộ và Cloud Boards (đăng nhập Google, mời bằng mã, x
 ### 4.9 Đồng bộ Android–iOS (A11)
 
 - MVP Android nhận 200+ look của iOS (chuyển sang `.flook` qua `look-cli`, đổi tên qua `NameGuard`, giữ Free/Pro như iOS), thư viện look theo 10 gói, Match Photo (Match v1 của lõi, FLC-E01-18) và cuộn phim.
-- MVP iOS chạy trên code đang có: giữ mọi quyền đã bán (Pro tháng, 3 tháng, năm, trọn đời; 3 gói look; 3 pass), không gỡ tính năng đã bán (trình sửa, Match → LUT, video 4K, hàng loạt), đổi tên "Polaroid" và "Pro-Mist" ⚠, thêm 8 máy miễn phí dạng look và gói Tết.
-- V1 (Q2/2027, cùng Studio iOS): iOS chuyển sang `FilmodeCoreKit`; kính ngắm, pass chữ ký bằng Metal, kho máy, Live Photo, StoreCore, chủ tiệc sự kiện.
+- MVP iOS chạy trên code đang có: giữ mọi quyền đã bán (Pro tháng, 3 tháng, năm, trọn đời; 3 gói look; 3 pass), không gỡ tính năng đã bán hay đang dùng (trình sửa, Match Photo, Match → LUT, nhập .cube và .xmp, video 4K, hàng loạt) nhưng không thêm tính năng chỉnh sâu mới (mục 3.3), đổi tên "Polaroid" và "Pro-Mist" ⚠, thêm 8 máy miễn phí dạng look và gói Tết.
+- V1-iOS-a (T3–T4/2027, cùng quý với Studio iOS): iOS chuyển sang `FilmodeCoreKit`; kính ngắm, kho máy, cuộn phim, StoreCore. V1-iOS-b (T7–T8/2027): pass chữ ký bằng Metal, Live Photo, DV/VHS, chủ tiệc sự kiện. Tách hai đợt vì trong Q2 dev iOS làm Studio iOS (nộp 18/6/2027).
 
 ## 5. Gói Free, Pro, IAP, Pass
 
@@ -181,7 +192,7 @@ Nguyên tắc (A9, [lập trường của lõi](../filmode-core.md#41-lập-trư
 | Ảnh động | Đủ: Motion Photo, MP4, GIF, Live Photo iOS | — | — | — |
 | Cuộn phim | Cuộn 12 kiểu, tráng, tráng trễ (V1) | Cuộn 24/36; photo dump (V1) | — | — |
 | Video (V1) | 30 giây 1080p, máy DV | 60 giây có tiếng | — | — |
-| Nhập và chỉnh | Áp máy cho ảnh có sẵn, hàng loạt 5 ảnh, chỉnh cơ bản, nhập .cube và preset, Match Photo | Hàng loạt 100 ảnh; xuất look Match thành .cube (V1) | — | — |
+| Nhập và chỉnh | Áp máy cho ảnh có sẵn, hàng loạt 5 ảnh, chỉnh cơ bản, nhập .cube và preset, Match Photo; "Mở trong Filmode Studio" để chỉnh sâu hoặc xuất .cube (V1) | Hàng loạt 100 ảnh | — | — |
 | Khung | 8 khung (Instant, Booth, Cutie, Frame, Noir, Retro, Raw, Film strip) | 6 khung Pro | Khung trong gói mùa | — |
 | Chia sẻ | Board, Cloud Boards, thẻ công thức QR (V1), "Máy của tôi" chỉ dùng riêng | "Máy của tôi" lưu và chia sẻ (V1) | — | — |
 | Sự kiện | Sự kiện thử 5 khách × 10 ảnh, 7 ngày; khách luôn miễn phí | — | — | Group, Party, Wedding |
@@ -215,13 +226,13 @@ Chi tiết ở [epics-features.md](epics-features.md). Số ngày là ngày côn
 |---|---|---|---|
 | **Giai đoạn 0** (trên code đang chạy) | 5/10 – 23/10/2026 | 7,5 | Sửa lỗi lưu ảnh và đo `save_failed`; danh mục Photography; đổi "Polaroid" → "Instant" và "Pro-Mist" → "Soft Mist" ⚠; tiêu đề mới hai store; giá VN theo vùng; kiểm kê iOS; kiểm quyền lợi iOS |
 | **MVP** (bản dựng lại trên lõi) | 26/10/2026 – ra mắt 18/1/2027 | 96 | 13 máy (8 Free) với pass chữ ký CCD, flash, ống kính rẻ, instant, DV, VGA, kira, Flash Drift, half-frame; kho máy, thử trước trả khi lưu, mua lẻ; gói Tết có date stamp âm lịch; ảnh = kính ngắm; 0.5×, flash màn hình, xoay đúng; ảnh động Motion Photo + MP4/GIF; cuộn 12/24/36; áp máy cho ảnh có sẵn, hàng loạt, chỉnh cơ bản, khung; 200+ look và Match Photo sang Android; gói miễn phí cố định, bảng SKU chung, paywall; listing 7 ngôn ngữ; chuyển dữ liệu 1.5.9; golden và checklist thiết bị; iOS: 8 máy dạng look, gói Tết, giữ quyền lợi |
-| **V1** | T2 – T7/2027 | 109 | Chế độ sự kiện (web camera, offline, tráng trễ, duyệt, ZIP, giá, chống lạm dụng) và 🧪 pilot; trình chiếu nếu pilot đạt; video 30/60 giây, DV, VHS; 5 máy mới; tùy biến máy, ngẫu nhiên, date stamp; tráng trễ, photo dump; chia sẻ 9:16; flash màu; Ultra HDR, Night; thẻ công thức QR; creator, giới thiệu bạn; gói Trung thu và mùa cưới; Filmode iOS chuyển lõi (kính ngắm, pass Metal, kho máy, Live Photo, StoreCore, chủ tiệc) |
+| **V1** | T2 – T8/2027 | 109 | Chế độ sự kiện (web camera, offline, tráng trễ, duyệt, ZIP, giá, chống lạm dụng) và 🧪 pilot T3–T4; trình chiếu nếu pilot đạt; video 30/60 giây, DV, VHS; 5 máy mới; tùy biến máy, ngẫu nhiên, date stamp; tráng trễ, photo dump; chia sẻ 9:16; flash màu; Ultra HDR, Night; thẻ công thức QR; nút mở Studio; creator, giới thiệu bạn; gói Trung thu và mùa cưới; Filmode iOS chuyển lõi T3–T4 (kính ngắm, kho máy, cuộn, StoreCore), phần iOS còn lại T7–T8 (pass Metal, Live Photo, DV/VHS, chủ tiệc) |
 | **V2** | Sau mốc "đẩy mạnh" | 7 | Gói Noel 2027; in ảnh sự kiện; nâng pass giữa sự kiện; board trên iOS; win-back |
 | **Tổng** | | **219,5** | 123 feature |
 
 ## 8. ASO
 
-Nguồn: Bảng 1, Bảng 8 của báo cáo và [ghi chú từ khóa](../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/keyword_search_demand.md). Cụm đầu (film camera, retro camera, digicam, ccd) bị OldRoll, ProCCD và ZANKHANA giữ top 3, nhưng ZANKHANA và Kapi cho thấy app mới vẫn chen vào được nhờ tiêu đề đủ từ khóa. Việc đầu tiên nên chi tiền theo báo cáo là thuê một công cụ ASO trả phí trong 1 tháng để lấy lượt tìm thật cho Play US và VN ⚠ trước khi chốt tiêu đề.
+Nguồn: Bảng 1, Bảng 8 của báo cáo và [ghi chú từ khóa](../../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/keyword_search_demand.md). Cụm đầu (film camera, retro camera, digicam, ccd) bị OldRoll, ProCCD và ZANKHANA giữ top 3, nhưng ZANKHANA và Kapi cho thấy app mới vẫn chen vào được nhờ tiêu đề đủ từ khóa. Việc đầu tiên nên chi tiền theo báo cáo là thuê một công cụ ASO trả phí trong 1 tháng để lấy lượt tìm thật cho Play US và VN ⚠ trước khi chốt tiêu đề.
 
 | Thị trường | Tiêu đề (≤ 30 ký tự) | Mô tả ngắn Play (≤ 80) hoặc subtitle iOS (≤ 30) |
 |---|---|---|
@@ -271,7 +282,7 @@ Mốc đo của Bảng 13: giai đoạn 0 là "không còn báo lỗi lưu ảnh
 
 | Rủi ro | Ảnh hưởng | Cách xử lý |
 |---|---|---|
-| MVP app cộng MVP lõi vượt sức 3 dev Android trước Tết | Lỡ mùa Tết 2027 | Dev hợp đồng 8 tuần; cut-line; phương án 2 dev là gói Tết trên code cũ ([Nhân sự](epics-features.md#nhân-sự)) |
+| MVP app cộng MVP lõi (186,5 ngày) vượt sức 3 dev Android (177 ngày) trước Tết | Lỡ mùa Tết 2027 | Dev hợp đồng 8 tuần; cut-line; phương án 2 dev là gói Tết trên code cũ ([Nhân sự](epics-features.md#nhân-sự)) |
 | Chưa biết cấu trúc code của Filmode Vibe và Filmode iOS ⚠ | Mục `Có sẵn` và iOS vượt ước tính | FMD-E11-01 kiểm kê trong giai đoạn 0; ước lại trước S1 |
 | Tên máy, khung hoặc gói trùng nhãn hiệu ("Polaroid", "Pro-Mist" của Tiffen ⚠) | App bị gỡ | `NameGuard` và lint (FLC-E04-02, -03); đổi tên ở giai đoạn 0; tra cứu nhãn hiệu cho 18 tên máy trước khi lên store ⚠ |
 | Đổi gói làm người dùng thấy bị "lấy lại" | Đánh giá 1★ (33% lời chê của nhóm app film) | `free-tier.json` và CI (FMD-E09-01); map mọi SKU cũ (FMD-E09-02); không gỡ tính năng iOS đã bán (FMD-E11-06) |
@@ -309,5 +320,5 @@ Không tính trong ngày công dev. Ước tính bằng "ngày nội dung" của
 ## 12. Liên kết
 
 - [README chung](../README.md), [Filmode Core](../filmode-core.md), [backlog lõi](../filmode-core-backlog.csv)
-- [Báo cáo: Lõi LUT của Filmode đủ nuôi ba app](../../reports/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u.md), mục "App 1 — Filmode", Bảng 2, 5, 6, 8, 10, 13 và phần rủi ro
-- Ghi chú nghiên cứu `research_notes/App camera film và LUT màu/`: [film_camera_apps.md](../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/film_camera_apps.md), [user_sentiment_pain_points.md](../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/user_sentiment_pain_points.md), [monetization_paid_features.md](../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/monetization_paid_features.md), [keyword_search_demand.md](../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/keyword_search_demand.md), [tech_feasibility_opportunities.md](../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/tech_feasibility_opportunities.md)
+- [Báo cáo: Lõi LUT của Filmode đủ nuôi ba app](../../../reports/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u.md), mục "App 1 — Filmode", Bảng 2, 5, 6, 8, 10, 13 và phần rủi ro
+- Ghi chú nghiên cứu `research_notes/App camera film và LUT màu/`: [film_camera_apps.md](../../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/film_camera_apps.md), [user_sentiment_pain_points.md](../../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/user_sentiment_pain_points.md), [monetization_paid_features.md](../../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/monetization_paid_features.md), [keyword_search_demand.md](../../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/keyword_search_demand.md), [tech_feasibility_opportunities.md](../../../research_notes/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u/tech_feasibility_opportunities.md)
