@@ -82,7 +82,7 @@ Mục tiêu: công thức tham số kiểu máy ảnh, tên tự đặt, thư vi
 
 Mô hình công thức, bảng ánh xạ tham số → trường `look.json` → pass GPU, 16 tông nền và danh mục công thức khởi đầu nằm ở [README mục 5.2](README.md#52-công-thức-màu-fms-e02).
 
-FMS-E02-01 cần ba trường `adjust` mới trong lõi (Điều chỉnh lõi #1) và tông nền dùng chung (Điều chỉnh lõi #2). Không có hai điều chỉnh này thì công thức quét QR trong Filmode hoặc FilCam sẽ ra màu khác Studio.
+FMS-E02-01 cần ba trường `adjust` mới trong lõi (FLC-E01-27, FLC-E01-28; Điều chỉnh lõi mục 1) và tông nền dùng chung (FLC-E02-11; mục 2). Không có hai điều chỉnh này thì công thức quét QR trong Filmode hoặc FilCam sẽ ra màu khác Studio.
 
 Khối lượng: 11 feature · MVP 16 ngày · V1 6,5 ngày · tổng **22,5 ngày**.
 
@@ -353,7 +353,7 @@ Phần lõi Studio dùng lại (không tính ở trên): định dạng look và
 
 ## Điều chỉnh lõi
 
-Các thay đổi Studio cần ở lõi. Người điều phối đã đưa vào `filmode-core.md` và `filmode-core-backlog.csv`; cột cuối ghi FLC ID đang xử lý ([lõi mục 11](../filmode-core.md#11-yêu-cầu-của-app-đã-đưa-vào-lõi)). Ngày công lõi **không** tính vào tổng của Studio. Feature Studio liên quan đã có FLC ID đó trong cột "Phụ thuộc".
+Các thay đổi Studio cần ở lõi. Người điều phối đã đưa vào `filmode-core.md` và `filmode-core-backlog.csv`; cột cuối ghi FLC ID đang xử lý ([lõi mục 11](../filmode-core.md#11-yêu-cầu-của-app-đã-đưa-vào-lõi)). Ngày công lõi **không** tính vào tổng của Studio. Feature Studio liên quan (FMS-E01-02, FMS-E02-01, -03, -07, -08, -10, -11, FMS-E08-01, -02, FMS-E12-09) đã có FLC ID đó trong cột "Phụ thuộc".
 
 | # | Lõi cần gì | Feature lõi liên quan | Vì sao Studio cần | Ước tính lõi | Cần xong trước | Lõi đã xử lý |
 |---|---|---|---|---|---|---|
@@ -367,7 +367,7 @@ Các thay đổi Studio cần ở lõi. Người điều phối đã đưa vào 
 | 8 | Chưa cần làm: nếu FilCam cần mở DNG trong trình chỉnh clip thì chuyển `:studio:raw` vào `:core:media` | — | Theo nguyên tắc 1.1 của lõi: app thứ hai cần thì chuyển vào lõi | — | — | → Không đổi lõi; ghi ở [lõi mục 1.1](../filmode-core.md#11-ranh-giới-lõi-và-app) |
 | 9 | Lint tên của lõi cho phép riêng bảng map tên kiểu nền của parser (chỉ nhận đầu vào, không hiện trên UI; README mục 5.2) | FLC-E04-03 | Bảng map phải chứa tên gốc như "Classic Chrome" để đọc công thức dạng chữ | 0 | FMS S7 | → đã đưa vào FLC-E04-03 (danh sách ngoại lệ có lý do) |
 
-Điều chỉnh #1 và #2 **chặn MVP của Studio**: FLC-E01-27 phải xong trước S1, FLC-E01-28 và FLC-E02-11 trước S2 (18/1/2027); dev Android của Studio làm dưới review của chủ module lõi ([lõi mục 8](../filmode-core.md#8-lộ-trình)). Tổng lõi thêm cho Studio là 7,5 ngày (Android 4, web 1, iOS 2,5). Cut-line của lõi có dời FLC-E01-18 (Match v1) khỏi MVP của Filmode, nhưng lõi vẫn phải giao Match v1 trước FMS S5 (1/3/2027), nên MVP của Studio không mất Match v1 (FMS-E04-01, -02).
+Điều chỉnh #1 và #2 **chặn MVP của Studio**: FLC-E01-27 làm trong S1, FLC-E01-28 và FLC-E02-11 xong trước S2 (18/1/2027); dev Android của Studio làm dưới review của chủ module lõi ([lõi mục 8](../filmode-core.md#8-lộ-trình)). Tổng lõi thêm cho Studio là 7,5 ngày (Android 4, web 1, iOS 2,5). Cut-line của lõi có dời FLC-E01-18 (Match v1) khỏi MVP của Filmode, nhưng lõi vẫn phải giao Match v1 trước FMS S5 (1/3/2027), nên MVP của Studio không mất Match v1 (FMS-E04-01, -02).
 
 ## Nội dung
 
@@ -398,7 +398,7 @@ Chụp ảnh mẫu nên dùng người mẫu và địa điểm có giấy đồ
 | B5.1 Bảo vệ tông da | Ở app | Tách nền và pass trộn ở lõi (FLC-E01-22); Studio làm UI (FMS-E05-01, -02) | Filmode dùng cùng tách nền cho photobooth |
 | B7.1 Ultra HDR | Ở app | Ở lõi (FLC-E06-04); Studio chỉ nối vào luồng xuất (FMS-E07-02) | FMD A2.4 cũng dùng |
 | B1.2, B1.3 "Free một phần/Pro" | Một dòng | Tách: FMS-E01-05/06 Free và 07 Pro; FMS-E01-09 Free và 10 Pro | Quy ước README chung: phần Free và phần trả phí tách dòng |
-| B2.1 Mô hình công thức | Chỉ ở app | Cần ba trường `adjust` mới và tông nền dùng chung ở lõi (Điều chỉnh lõi #1, #2) | Để QR công thức ra cùng màu trong cả ba app |
+| B2.1 Mô hình công thức | Chỉ ở app | Cần ba trường `adjust` mới và tông nền dùng chung ở lõi (FLC-E01-27, FLC-E01-28, FLC-E02-11) | Để QR công thức ra cùng màu trong cả ba app |
 | B8.1 Mã chữ | Ở app | Mã chữ là `id` 8 ký tự của link look cloud (FLC-E08-03) | Một hệ mã cho cả ba app |
 | B10.2 Studio Pro | Trọn đời và năm | Giữ đúng: không có gói tháng | Bảng 8 chỉ có $19.99 trọn đời và $14.99/năm; gói tháng làm loãng giá neo trọn đời |
 | — | — | Epic mới FMS-E12 (iOS), FMS-E13 (chất lượng) | Xem [Tổng quan epic](#tổng-quan-epic) |
@@ -406,7 +406,7 @@ Chụp ảnh mẫu nên dùng người mẫu và địa điểm có giấy đồ
 
 ## Lộ trình sprint
 
-Bảng 13 đặt Studio Android ở Q1/2027 và iOS ở Q2/2027. Sprint 2 tuần. Lõi giao các mục `V1` "cần cho FMS" theo hạn từng sprint ở [lộ trình lõi](../filmode-core.md#8-lộ-trình): FLC-E01-27 trước S1; FLC-E01-28, FLC-E02-11, FLC-E08-02 trước S2; FLC-E01-05, -07, -08 trước S3; FLC-E02-08 trước S4; FLC-E06-04 và FLC-E01-18 trước S5. Lịch dưới khớp [lịch cả họ app](../README.md#lịch-và-nhân-sự-cả-họ-app).
+Bảng 13 đặt Studio Android ở Q1/2027 và iOS ở Q2/2027. Sprint 2 tuần. Lõi giao các mục `V1` "cần cho FMS" theo hạn từng sprint ở [lộ trình lõi](../filmode-core.md#8-lộ-trình): FLC-E01-27 trong S1; FLC-E01-28, FLC-E02-11, FLC-E08-02 trước S2; FLC-E01-05, -07, -08 trước S3; FLC-E02-08 trước S4; FLC-E06-04 và FLC-E01-18 trước S5. Lịch dưới khớp [lịch cả họ app](../README.md#lịch-và-nhân-sự-cả-họ-app).
 
 ### Android MVP (Q1/2027)
 
@@ -460,7 +460,7 @@ V2 (78,5 ngày) chỉ mở khi đạt tiêu chí "đẩy mạnh" ở README mụ
 ## Nhân sự
 
 **Android MVP (Q1/2027): cần 2 dev Android.** Theo [lịch cả họ app](../README.md#lịch-và-nhân-sự-cả-họ-app), đó là dev D (dev Android mới, từ 4/1/2027) và dev B của nhóm Filmode (từ 18/1/2027, sau ngày ra mắt Filmode). MVP là 68 ngày trong 6 sprint (12 tuần), cộng khoảng 3,5 ngày lõi dev Studio làm (FLC-E01-27, FLC-E01-28, FLC-E02-11) và 4 ngày FLC-E02-08 do dev B làm. Một dev có tối đa 60 ngày danh nghĩa trong 12 tuần, thực tế khoảng 45–50 ngày vì còn sửa lỗi Filmode sau đợt Tết, review code và làm việc với nội dung. Vì vậy:
-- **2 dev: vừa lịch.** Mỗi sprint dùng khoảng 55–60% công suất cho backlog; phần còn lại cho tích hợp UI, sửa lỗi beta và 20–25% kiểm thử thiết bị như Bảng 13 khuyên. Gợi ý chia: dev D làm trình sửa, preview, xuất, hiệu năng (FMS-E01, FMS-E07, FMS-E13); dev B làm công thức, nhập, match, paywall, onboarding (FMS-E02, FMS-E03, FMS-E04, FMS-E10, FMS-E11). Trong S1 dev B còn làm Filmode S6, nên dev D làm FMS-E02-01 và FLC-E01-27, còn FMS-E13-01 và FMS-E02-02 dời sang S2. Q1/2027 là quý căng nhất của cả họ app: Studio dùng khoảng 75% công suất của hai dev, cao hơn mức 55–60% nêu ở đây; trễ thì dùng cut-line (b) dưới đây hoặc lùi ra mắt khoảng 2 tuần sang giữa T4/2027.
+- **2 dev: vừa lịch.** Mỗi sprint dùng khoảng 55–60% công suất cho backlog; phần còn lại cho tích hợp UI, sửa lỗi beta và 20–25% kiểm thử thiết bị như Bảng 13 khuyên. Gợi ý chia: dev D làm trình sửa, preview, xuất, hiệu năng (FMS-E01, FMS-E07, FMS-E13); dev B làm công thức, nhập, match, paywall, onboarding (FMS-E02, FMS-E03, FMS-E04, FMS-E10, FMS-E11). Trong S1 dev B còn làm Filmode S6, nên dev D làm FMS-E02-01 và FLC-E01-27, còn FMS-E13-01 và FMS-E02-02 dời sang S2. Tính cả phần lõi dev Studio làm, Studio dùng khoảng 69% sức danh nghĩa của hai dev trong Q1/2027 ([tải so với sức](../README.md#tải-so-với-sức)), cao hơn mức 55–60% nêu ở đây; trễ thì dùng cut-line (b) dưới đây hoặc lùi ra mắt khoảng 2 tuần sang giữa T4/2027.
 - **1 dev: không vừa Q1.** Chọn một trong hai: (a) lùi ra mắt khoảng 4 tuần sang cuối T4/2027 và lùi iOS tương ứng; hoặc (b) cắt khoảng 9,5 ngày sang V1: FMS-E01-07 (HSL, bánh xe màu, 4,5), FMS-E01-10 (1), FMS-E07-02 (Ultra HDR, 1), FMS-E01-03 phần bản sao ảo (khoảng 0,5), FMS-E13-04 phần Baseline Profile (khoảng 1) và FMS-E02-08 (đọc QR từ ảnh, 1,5; vẫn mở được bằng link). Phương án (b) còn khoảng 58,5 ngày, nên thực tế cần kết hợp (a) và (b). **Không được cắt:** FMS-E02-07 (thẻ QR, là vòng lặp chia sẻ), FMS-E03-05 (bảo vệ LUT người khác), FMS-E10-02 và FMS-E10-03 (gói Free cố định, paywall tuân thủ), FMS-E13-02 (golden).
 
 **Android V1 (Q2/2027): 1 dev Android (dev B)** cho 50,5 ngày Android và QA trong 12 tuần, cộng khoảng 8 ngày web và backend (FMS-E08-02, FMS-E08-04) do dev web/backend của cả họ app làm (50% thời gian từ Q2/2027). Dev D sang FilCam từ 5/4/2027.

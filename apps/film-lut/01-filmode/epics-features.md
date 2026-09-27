@@ -358,7 +358,7 @@ Ghi chú lịch:
 
 ## Điều chỉnh lõi
 
-Những điểm app cần lõi đổi hoặc làm rõ. Người điều phối đã đưa vào lõi; cột cuối ghi FLC ID đang xử lý ([lõi mục 11](../filmode-core.md#11-yêu-cầu-của-app-đã-đưa-vào-lõi)). Feature app ở cột "Feature app" đã có FLC ID đó trong cột "Phụ thuộc".
+Những điểm app cần lõi đổi hoặc làm rõ. Người điều phối đã đưa vào lõi; cột cuối ghi FLC ID đang xử lý ([lõi mục 11](../filmode-core.md#11-yêu-cầu-của-app-đã-đưa-vào-lõi)). Feature app ở cột "Feature app" có FLC ID đó trong cột "Phụ thuộc" khi thật sự phụ thuộc; ngoại lệ ghi ở cột cuối.
 
 | # | Lõi | Cần gì | Vì sao | Feature app | Lõi đã xử lý |
 |---|---|---|---|---|---|
@@ -369,7 +369,7 @@ Những điểm app cần lõi đổi hoặc làm rõ. Người điều phối �
 | 5 | FLC-E01-16 hoặc `:core:media` | Luồng mã hóa bộ đệm vòng từ đầu ra GPU; ai sở hữu trình ghi Motion Photo (hiện để ở app) | Ảnh động; FilCam có thể dùng lại | FMD-E03-01..03 | → Quyết định: FMD sở hữu (`:filmode:motion`) vì chỉ Filmode có ảnh động; chuyển vào `:core:media` khi app thứ hai cần ([lõi mục 1.1](../filmode-core.md#11-ranh-giới-lõi-và-app)) |
 | 6 | FLC-E08-02 | Token khách ẩn danh cho web (Anonymous Auth ⚠) và App Check/reCAPTCHA cho web | Khách sự kiện không có tài khoản | FMD-E07-03, FMD-E07-16 | → đã đưa vào FLC-E08-02 (mở rộng, `V1`, +1 ngày, xong trước 15/2/2027) |
 | 7 | FLC-E03-10 | Sự kiện thử miễn phí không cần giao dịch; hoàn tiền pass khóa sự kiện chưa bắt đầu | Chủ tiệc thử trước khi trả | FMD-E07-04, FMD-E07-14 | → đã đưa vào FLC-E03-10 (mở rộng, `V1`, +0,5 ngày, xong trước 15/2/2027) |
-| 8 | FLC-E03-04 | Bảng map SKU gồm SKU "Pro-Mist" đổi tên hiển thị thành "Soft Mist" nhưng giữ product ID; SKU 3 tháng iOS ngừng bán nhưng vẫn cấp quyền | Tránh nhãn hiệu, không thu hồi | FMD-E09-02, FMD-E12-03 | → đã đưa vào FLC-E03-04 (cột tên hiển thị và trạng thái, `MVP`, không đổi ngày) |
+| 8 | FLC-E03-04 | Bảng map SKU gồm SKU "Pro-Mist" đổi tên hiển thị thành "Soft Mist" nhưng giữ product ID; SKU 3 tháng iOS ngừng bán nhưng vẫn cấp quyền | Tránh nhãn hiệu, không thu hồi | FMD-E09-02, FMD-E12-03 | → đã đưa vào FLC-E03-04 (cột tên hiển thị và trạng thái, `MVP`, không đổi ngày); FMD-E12-03 làm trên code iOS cũ nên không phụ thuộc bảng map của lõi |
 | 9 | FLC-E01-23 | Ưu tiên sớm trong V1 (T2/2027) thay vì "theo lịch V1 của app" | Pilot sự kiện sau Tết | FMD-E07-05 | → FLC-E01-23 có hạn 15/2/2027 ([lõi mục 8](../filmode-core.md#8-lộ-trình)) |
 
 ## Chỗ lệch so với Bảng 10

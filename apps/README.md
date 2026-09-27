@@ -91,3 +91,11 @@ Mỗi thư mục có danh sách ⚠ riêng. Các mục ảnh hưởng tới code
 - **01:** lịch quý của UK MTD; danh mục chi phí từng nước; định dạng DATEV và phần mềm kế toán; bảng ánh xạ EN 16931 sang UBL/CII; đọc file đính kèm PDF/A-3.
 - **02:** câu chữ 14 chất gây dị ứng theo Phụ lục II Quy định 1169/2011 ở từng ngôn ngữ; nguồn dị ứng của E-number mơ hồ và giấy phép dữ liệu; phạm vi MDR, trách nhiệm sản phẩm và GDPR Điều 9; quy định sử dụng Foundation Models cho phần giải thích.
 - **03:** API RoomPlan (`floors`, `Codable`, `StructureBuilder`, lỗi phiên quét); App Review với sản phẩm "slot" không tiêu hao; nội dung bắt buộc của mẫu biên bản FR/UK/DE/NL.
+
+## Họ app thứ hai: film và LUT (Filmode)
+
+Thư mục [film-lut/](film-lut/README.md) chứa kế hoạch cho một họ app khác, Android trước, dựng trên lõi chung Filmode Core (`FLC`), theo [báo cáo "Lõi LUT của Filmode đủ nuôi ba app"](../reports/App%20camera%20film%20v%C3%A0%20LUT%20m%C3%A0u.md). Quy ước ID, ưu tiên và gói của họ app này nằm trong README của thư mục đó, không dùng quy ước ở trên.
+
+- [01 · Filmode](film-lut/01-filmode/) (`FMD`): máy ảnh digicam, film và chế độ sự kiện; bản dựng lại ra mắt 18/1/2027.
+- [02 · Filmode Studio](film-lut/02-filmode-studio/) (`FMS`): công thức màu và LUT cho ảnh; Android Q1/2027, iOS Q2/2027.
+- [03 · FilCam](film-lut/03-filcam/) (`FCM`): máy quay LUT và RAW; Android Q3/2027.

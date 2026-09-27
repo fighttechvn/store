@@ -144,7 +144,7 @@ Lịch này gộp lộ trình của [lõi](filmode-core.md#8-lộ-trình), [Film
 | Dev hợp đồng (Android) | Pass chữ ký và kho máy của Filmode, S2–S5 | 9/11/2026 – 1/1/2027 |
 | Dev D (Android, **tuyển mới**) | Studio MVP (trình sửa, preview, xuất), làm FLC-E01-27, -28; từ 5/4/2027 sang FilCam (công cụ đo, thư viện LUT, chỉnh màu, kiếm tiền) | 4/1/2027 |
 | Dev iOS | 50% trong giai đoạn 0–1 (Filmode iOS trên code cũ, bắt đầu lõi iOS); 100% từ T1/2027 (lõi iOS, Filmode iOS chuyển lõi, Studio iOS) | 5/10/2026 |
-| Dev web/backend (**tuyển mới**, fullstack) | Backend chung, WebGL2, xác minh pass, web camera sự kiện; 100% tới hết T3/2027, 50% từ Q2/2027 | 11/1/2027 |
+| Dev web/backend (**tuyển mới**, fullstack) | Backend chung, WebGL2, xác minh pass, web camera sự kiện, trang web của Studio và FilCam; 100% tới 2/4/2027, 50% từ Q2/2027 | 11/1/2027 |
 | Tester thiết bị | 50% từ S3 của Filmode; 100% khi FilCam chạy thử 2 tuần trên ma trận (28/6 – 23/7/2027) | 23/11/2026 |
 
 Người dựng look và nội dung, người hỗ trợ khách trực Zalo trong ngày pilot sự kiện tính riêng, không phải dev.
@@ -184,11 +184,11 @@ Mỗi kế hoạch app đúng khi đọc riêng, nhưng cộng lại có năm ch
 4. **Q2/2027 cần 4 dev Android** (FilCam 2, Studio V1 1, Filmode V1 1), không phải 3. Vì vậy dev D được giữ lại sau Studio MVP và sang FilCam.
 5. **Q2/2027 cần 66 ngày iOS** (Studio iOS 37 + Filmode iOS V1 29) cho một dev iOS có khoảng 62 ngày. Lịch ở đây tách Filmode iOS V1: phần chuyển lõi 16 ngày làm ngay sau lõi iOS (1/3 – 2/4/2027), phần còn lại 13 ngày (pass Metal, Live Photo, DV/VHS, chủ tiệc iOS) dời sang T7–T8/2027, để Studio iOS nộp đúng 18/6.
 
-Ngoài ra, kế hoạch Filmode chỉ tính "1 dev web/backend khoảng 8 tuần" cho sự kiện. Cộng phần web và backend của lõi (34 ngày), Studio (42 ngày trên cả V1–V2) và FilCam (web 3,5 ngày), cần một dev fullstack toàn thời gian trong Q1/2027 và nửa thời gian từ Q2/2027.
+Ngoài ra, kế hoạch Filmode chỉ tính "1 dev web/backend khoảng 8 tuần" cho sự kiện (29 ngày web và backend ở V1). Cộng phần web và backend `V1` của lõi (16 ngày), của Studio (8 ngày ở V1, 23 ngày ở V2) và trang web của FilCam (3,5 ngày), cần một dev fullstack toàn thời gian trong Q1/2027 và nửa thời gian từ Q2/2027.
 
 **Khuyến nghị:** 4 dev Android (A, B, C và dev D tuyển từ 4/1/2027) + dev Android hợp đồng 8 tuần (S2–S5) + 1 dev iOS (50% trong giai đoạn 0–1, 100% từ T1/2027) + 1 dev web/backend (từ 11/1/2027) + tester thiết bị 50% (100% khi FilCam chạy thử).
 
-**Nếu không tuyển được dev D** (chỉ 3 dev Android trong 2027): Studio bắt đầu 18/1 với A và B, áp cut-line (b) của Studio và ra mắt khoảng giữa T4/2027; dev A làm lõi V1 cho FilCam chậm hơn, nên FilCam bắt đầu 5/4 với một dev (C) và ra mắt khoảng đầu T11/2027 như phương án "1 dev" của FilCam; Filmode V1-c (video, 5 máy V1, extensions) dời sang Q4/2027. Thứ tự giữ nguyên: sự kiện và pilot của Filmode, rồi Studio, rồi FilCam.
+**Nếu không tuyển được dev D** (chỉ A, B, C trong 2027): Studio bắt đầu 18/1 với A và B, ra mắt khoảng giữa T4/2027 (hoặc giữ cuối T3 bằng cut-line (b) của Studio). C làm Filmode sau ra mắt, phần Android của sự kiện và phần lõi V1 cho Studio (FLC-E01-27, -28, FLC-E02-11, bộ nhập, deep link, Ultra HDR). A làm phần lõi cho FilCam sau khi Studio ra mắt; FilCam bắt đầu khoảng 10/5/2027 với A và C (C rời Filmode sau pilot) và ra mắt khoảng giữa T9/2027. Filmode V1-c (video, 5 máy V1, extensions, photobooth mới) dời sang Q4/2027; B ở lại Studio V1. Thứ tự vẫn là sự kiện và pilot của Filmode, rồi Studio, rồi FilCam.
 
 **Nếu chỉ có 2 dev Android trong giai đoạn 1:** không kịp bản dựng lại trước Tết. Làm giai đoạn 0, gói Tết, đổi tên, giá VN và 2–3 máy chữ ký (Mochi 32, Flash Drift, Paper 27) trên code đang chạy; phát hành bản dựng lại trên lõi vào T3/2027; pilot sự kiện T4–T5/2027; Studio Android lùi sang Q2/2027 (ra mắt khoảng T6); FilCam lùi sang Q4/2027.
 

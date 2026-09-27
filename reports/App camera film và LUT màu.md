@@ -472,6 +472,8 @@ Có bốn nhóm rủi ro chính.
 
 **Dữ liệu.** Chưa có số lượt tìm kiếm tuyệt đối cho bất kỳ từ khóa nào, vì Keyword Planner và các công cụ ASO đều cần tài khoản trả phí. Mọi con số doanh thu đều là ước tính Sensor Tower, không ghi rõ tháng và không tính doanh thu quảng cáo. Bảng xếp hạng là ảnh chụp của một ngày. Chưa có dữ liệu về nhu cầu app sự kiện ở Việt Nam, nên chế độ sự kiện của App 1 cần được thử ở quy mô nhỏ trước khi đầu tư lớn.
 
+Backlog chi tiết theo epic, module và feature của lõi và ba app nằm ở [apps/film-lut/README.md](../apps/film-lut/README.md).
+
 ## Kết luận
 
 Ngách này không thưởng cho số lượng filter. Nó thưởng cho ba thứ khác. Một là một mẹo chụp đủ đặc biệt để lan trên TikTok. Hai là sự tin cậy: mua đứt được, không bị lấy lại thứ đã có, không bắt tạo tài khoản. Ba là look mang đi được giữa ảnh, video và các nền tảng. Đội đã có sẵn lời hứa "không quảng cáo, không watermark" và một lõi LUT hiếm app nhỏ nào có, nhưng gần như chưa có phân phối. Vì vậy, công sức tiếp theo nên dồn vào listing, từ khóa, giá bản địa hóa và định dạng look chung, thay vì thêm look mới. Chiến lược nền tảng hợp lý là dùng Android để có lượt cài và kiểm chứng sản phẩm, dùng iOS để thu tiền, và dùng Việt Nam cùng Đông Nam Á làm bàn đạp đầu tiên.
