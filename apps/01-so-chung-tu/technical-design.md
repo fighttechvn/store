@@ -840,7 +840,7 @@ func duplicateScore(_ a: Fingerprint, _ b: Fingerprint) -> Double {
 Với mỗi `VATLine` (r = bậc, u = 1 đơn vị nhỏ nhất của tiền tệ):
 - `|net + vat − gross| ≤ 2u` (làm tròn từng dòng).
 - `|round(net × r) − vat| ≤ max(2u, 0,1% × net)` (biên lai làm tròn theo dòng hàng hoặc theo tổng).
-- Bậc r có trong gói quốc gia và còn hiệu lực ở ngày chứng từ. Bậc lạ thì cảnh báo, không chặn.
+- Bậc r có trong gói quốc gia và còn hiệu lực ở ngày chứng từ. Bậc lạ thì cảnh báo, không chặn. Kế hoạch chỉ nêu bậc chuẩn DE 19%, UK 20%, FR 20%; các bậc giảm (ví dụ DE 7%, FR 10%, 5,5%, 2,1%, UK 5%, 0%) và ngày hiệu lực ⚠ cần xác minh trước khi đưa vào gói.
 
 Với cả chứng từ:
 - `|Σ gross_i − tổng| ≤ (n + 1)u` với n là số dòng VAT.
@@ -1087,7 +1087,7 @@ func visibleProducts() async -> [SCTProduct] {
 
 - Trial: kiểm tra `isEligibleForIntroOffer` của nhóm `sct.pro`; chỉ hiện "Hôm nay 0 €, Ngày 7: 39,99 €/năm, tự gia hạn" khi đủ điều kiện, không thì hiện giá thẳng.
 - Người đã mua trọn đời và vẫn còn thuê bao: hiện nhắc "Quản lý gói" để tự hủy thuê bao; app không tự hủy.
-- Offer code, win-back, `AppStore.showManageSubscriptions`, `AppStore.sync()` dùng từ CORE-E07-03 (`V1.1`); "Khôi phục mua" và "Quản lý gói" có ngay ở MVP qua CORE-E07-01.
+- "Khôi phục mua" (`AppStore.sync()`) có ở MVP qua CORE-E07-01. Link "Quản lý gói" (`AppStore.showManageSubscriptions` hoặc `.manageSubscriptionsSheet`) nằm trong checklist paywall nên phải có ở MVP; lõi đã tách phần này thành CORE-E07-04 (MVP) và SCT-E09-03 dùng nó. Offer code và win-back dùng CORE-E07-03 ở `V1.1`.
 - **Test:** file `.storekit` có 3 sản phẩm và trial; `SKTestSession` cho mua năm, hết trial, gia hạn, hết hạn, hoàn tiền, mua trọn đời khi đang có thuê bao, lỗi mạng khi mua (SCT-E12-03).
 - **A/B không SDK (`V1.1`, SCT-E09-05):** biến thể B dùng product ID riêng (ví dụ `sct.pro.yearly.b`) cùng nhóm; chọn biến thể ngẫu nhiên và cố định trên máy; đọc kết quả theo SKU trong báo cáo Sales ⚠ cần xác minh cách App Store Connect tách trial theo product.
 
@@ -1126,7 +1126,7 @@ Nhập hàng loạt chạy tuần tự và tạm dừng khi `ProcessInfo.thermal
 | **Cộng ảnh và PDF** | **50** | **60** | **45** | **30** | **185** | **55** |
 | E-invoice: XRechnung UBL, CII, ZUGFeRD, Factur-X | – | 30 | 10 | – | 40 | 10 (XML VN) |
 
-Mở rộng lên khoảng 500 file ở `V1.1` (SCT-E12-04). Nhiều biên lai Đức có 2 bậc VAT (19% và 7%); bộ DE cần ít nhất 10 biên lai như vậy.
+Mở rộng lên khoảng 500 file ở `V1.1` (SCT-E12-04). Bộ DE cần ít nhất 10 biên lai có 2 bậc VAT (19% và bậc giảm ⚠), vì đây là trường hợp dễ sai nhất.
 
 ### 12.2 Mục tiêu độ chính xác theo trường
 
@@ -1200,3 +1200,4 @@ Mỗi câu cần người chịu trách nhiệm và hạn trả lời trong S0, 
 13. **Khoản thu:** landlord và sole trader cần ghi thu cho MTD. Đưa SCT-E05-07 lên đầu `V1.1` hay giữ app chỉ cho chi phí?
 14. **App Analytics:** dữ liệu phiên và giữ chân trong App Store Connect chỉ tính người dùng đồng ý chia sẻ; tỷ lệ đó có đủ để đọc KPI không? ⚠
 15. **Hạn tờ khai năm ở UK** (cuối tháng 1 ⚠) có đủ để biện minh phương án B ra UK trước không?
+16. ~~**Cho chủ lõi:** kéo phần "Quản lý gói" của CORE-E07-03 lên MVP~~ Đã xử lý: lõi thêm CORE-E07-04 (MVP, 0,5 ngày).

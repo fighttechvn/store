@@ -58,7 +58,7 @@ App thêm extractor riêng cho chứng từ, conform `FieldExtractor` của `Cor
 |---|---|---|---|---|---|---|
 | SCT-E03-01 | RBExtract | Điều phối OCR: PDF có lớp chữ thì lấy chữ bằng PDFKit, còn lại OCR bằng CORE; gộp nhiều trang; lưu văn bản và bounding box | MVP | 1 | CORE-E03-01; CORE-E03-02; CORE-E03-03 | Khi nhập PDF hóa đơn có lớp chữ thì không chạy OCR và văn bản khớp `PDFPage.string`; khi OCR ảnh 2 trang thì mỗi dòng có số trang và tọa độ |
 | SCT-E03-02 | RBExtract | `ReceiptRuleExtractor` (conform `FieldExtractor`): tổng, ngày, người bán, số hóa đơn, tiền tệ, phương thức thanh toán, loại chứng từ (biên lai, hóa đơn, credit note); từ khóa EN, DE, FR | MVP | 3 | CORE-E04-01; SCT-E03-01 | Khi chạy trên bộ vàng EN/DE/FR thì đạt ngưỡng "chỉ luật" ở mục 12 của thiết kế (tổng ≥ 92%, ngày ≥ 90%) |
-| SCT-E03-03 | RBExtract | Tách nhiều dòng VAT (bậc, net, VAT, gross) từ bảng thuế; hỗ trợ mã A/B trên biên lai Đức và dòng "VAT @ 20%" | MVP | 1,5 | SCT-E03-02 | Khi biên lai DE có bậc 19% và 7% thì ra 2 `VATLine` và tổng gross khớp tổng chứng từ trong dung sai |
+| SCT-E03-03 | RBExtract | Tách nhiều dòng VAT (bậc, net, VAT, gross) từ bảng thuế; hỗ trợ mã A/B trên biên lai Đức và dòng "VAT @ 20%"; bậc giảm lấy từ gói quốc gia ⚠ | MVP | 1,5 | SCT-E03-02 | Khi biên lai DE có bậc 19% và 7% thì ra 2 `VATLine` và tổng gross khớp tổng chứng từ trong dung sai |
 | SCT-E03-04 | RBExtract | `ReceiptLLMExtractor`: `@Generable ReceiptDraft` có `@Guide`; chỉ chạy khi Foundation Models khả dụng và hỗ trợ ngôn ngữ; cắt khối theo token | MVP | 1,5 | CORE-E04-02; SCT-E03-01 | Khi Foundation Models không khả dụng thì pipeline vẫn trả kết quả từ luật; khi khả dụng thì trường luật bỏ trống được lấp với nguồn `llm` |
 | SCT-E03-05 | RBExtract | Hợp nhất và kiểm tra: `MergedExtractor`, kiểm tra toán VAT, ngày hợp lý, bậc VAT có trong gói; gắn cờ "cần xem lại" | MVP | 1,5 | CORE-E04-03; SCT-E03-03; SCT-E03-04 | Khi net + VAT lệch gross quá dung sai thì chứng từ ở trạng thái cần xem lại và trường lệch được tô |
 | SCT-E03-06 | RBExtract | Màn xem lại và sửa: ảnh có khung vùng nguồn, nhập số theo locale, nút chấp nhận nhanh; mỗi lần sửa ghi audit | MVP | 2 | SCT-E03-05; CORE-E05-03 | Khi sửa tổng tiền thì có `AuditEntry` với giá trị cũ, mới và nguồn `user`; khi nhập "1.234,56" với hồ sơ DE thì lưu 1234.56 |
@@ -151,8 +151,8 @@ Paywall chỉ liệt kê tính năng đã có trong bản đang phát hành (Gui
 |---|---|---|---|---|---|---|
 | SCT-E09-01 | RBPaywall | Cấu hình sản phẩm `sct.pro.yearly` (trial 7 ngày), `sct.pro.monthly`, `sct.pro.lifetime` → quyền lợi `pro`; bảng tính năng bị khóa | MVP | 1 | CORE-E07-01 | Khi mua bất kỳ sản phẩm nào thì tính năng Pro mở ngay; khi hoàn tiền thì khóa lại ở lần kiểm tra kế tiếp |
 | SCT-E09-02 | RBPaywall | Điểm chặn theo ngữ cảnh: xuất theo kỳ (CSV, ZIP, PDF kỳ), tự phân loại; không chặn chụp, lưu, xem, tìm, PDF đơn, xóa | MVP | 0,5 | SCT-E09-01 | Khi người dùng free bấm "Xuất quý" thì thấy paywall; khi đóng paywall thì mọi tính năng miễn phí vẫn dùng được |
-| SCT-E09-03 | RBPaywall | Nội dung paywall theo storefront: gói đặt cạnh nhau, giá thực là chữ lớn nhất, mốc "Ngày 7", gói trọn đời chỉ ở DE/AT/CH, quyền lợi ghi cụ thể; hiện 1 lần ở cuối onboarding, có nút đóng | MVP | 1 | CORE-E07-02; SCT-E09-02 | Khi so với checklist paywall của kế hoạch thì đạt 100%; storefront FR không hiện gói trọn đời |
-| SCT-E09-04 | RBPaywall | Offer code, win-back, "Quản lý gói" | V1.1 | 0,5 | CORE-E07-03 | Khi nhập offer code hợp lệ thì quyền lợi Pro kích hoạt |
+| SCT-E09-03 | RBPaywall | Nội dung paywall theo storefront: gói đặt cạnh nhau, giá thực là chữ lớn nhất, mốc "Ngày 7", gói trọn đời chỉ ở DE/AT/CH, quyền lợi ghi cụ thể, link "Quản lý gói"; hiện 1 lần ở cuối onboarding, có nút đóng | MVP | 1 | CORE-E07-02; SCT-E09-02; CORE-E07-04 | Khi so với checklist paywall của kế hoạch thì đạt 100%; storefront FR không hiện gói trọn đời |
+| SCT-E09-04 | RBPaywall | Offer code, win-back | V1.1 | 0,5 | CORE-E07-03 | Khi nhập offer code hợp lệ thì quyền lợi Pro kích hoạt |
 | SCT-E09-05 | RBPaywall | A/B paywall không cần SDK: mỗi biến thể dùng product ID riêng, đọc kết quả từ báo cáo App Store Connect ⚠ | V1.1 | 1,5 | SCT-E09-03 | Khi chạy 2 biến thể thì báo cáo Sales tách được số trial và số trả tiền theo product ID |
 
 ## SCT-E10 · Bản địa hóa & tuân thủ
@@ -235,20 +235,20 @@ Theo epic:
 
 ## Lộ trình sprint
 
-**Khối lượng cần làm trước khi nộp:** lõi MVP 42 ngày (trong đó CORE-E02-02 `DataScannerViewController` 2 ngày không cần cho SCT, dời sang khi build app 02/03) cộng 2 ngày 🧪 spike OCR của lõi, cộng SCT MVP 50 ngày. Tổng khoảng **92 ngày công**.
+**Khối lượng cần làm trước khi nộp:** lõi MVP 44,5 ngày, trừ 3 ngày không cần cho SCT và dời sang khi build app 03/02 (CORE-E02-02 `DataScannerViewController` 2 ngày, CORE-E03-04 tùy chọn `LineRecognizer` 1 ngày), cộng 2 ngày 🧪 spike OCR của lõi, cộng SCT MVP 50 ngày. Tổng khoảng **93,5 ngày công**.
 
 **1 dev hay 2 dev:**
-- **1 dev: không khả thi.** 92 ngày công là khoảng 18–19 tuần. Bắt đầu 28/9 thì nộp sớm nhất khoảng tháng 2/2027, lỡ mùa thuế tháng 1–2.
+- **1 dev: không khả thi.** 93,5 ngày công là khoảng 19 tuần. Bắt đầu 28/9 thì nộp sớm nhất khoảng tháng 2/2027, lỡ mùa thuế tháng 1–2.
 - **2 dev toàn thời gian từ 28/9: vừa khít, không có biên.** Công suất gộp đến ngày đóng tính năng 27/11 khoảng 88 ngày công (S0 trừ việc thủ tục, S1–S3 đủ, S4 chỉ tuần đầu). Kế hoạch dưới đây chạy gần 100% công suất, nên phải chuẩn bị sẵn cut-line và phương án B.
 
 | Sprint | Thời gian | Mục tiêu | CORE | SCT | Ngày (CORE + SCT) |
 |---|---|---|---|---|---|
 | S0 | 28/9–9/10 | Nền móng, spike, thủ tục | CORE-E01-01, E01-02, E05-01, E05-02, E05-03, E09-01, E10-01, E12-01; 🧪 spike OCR EN/DE/FR/VI (2 ngày) | SCT-E07-01, E01-01, E04-01 🧪, E12-01, E10-01 | 12 + 5,5 = 17,5 |
-| S1 | 12/10–23/10 | Chụp, nhập, OCR, hồ sơ, parser UBL/CII | CORE-E02-01, E02-03, E03-01, E03-02, E03-03, E13-01 | SCT-E01-02, E01-03, E07-02, E02-01, E02-02, E02-04, E03-01, E04-02, E04-03 | 9 + 10 = 19 |
+| S1 | 12/10–23/10 | Chụp, nhập, OCR, hồ sơ, parser UBL/CII | CORE-E02-01, E02-03, E03-01, E03-02, E03-03, E13-01, E14-01 | SCT-E01-02, E01-03, E07-02, E02-01, E02-02, E02-04, E03-01, E04-02, E04-03 | 10 + 10 = 20 |
 | S2 | 26/10–6/11 | Trích xuất bằng luật và LLM, ZUGFeRD, Share Extension | CORE-E04-01, E04-02, E04-03, E12-02 | SCT-E03-02, E03-03, E03-04, E04-04, E04-05, E02-03 | 10 + 10 = 20 |
-| S3 | 9/11–20/11 | Xem lại, phân loại, kỳ, paywall; build TestFlight beta ngoài | CORE-E06-01, E06-02, E06-03, E07-01, E07-02 | SCT-E03-05, E03-06, E04-06, E05-01, E05-02, E05-03, E06-01, E09-01, E09-02, E02-05 | 8 + 12 = 20 |
+| S3 | 9/11–20/11 | Xem lại, phân loại, kỳ, paywall; build TestFlight beta ngoài | CORE-E06-01, E06-02, E06-03, E07-01, E07-02, E07-04 | SCT-E03-05, E03-06, E04-06, E05-01, E05-02, E05-03, E06-01, E09-01, E09-02, E02-05 | 8,5 + 12 = 20,5 |
 | S4 | 23/11–4/12 | Xuất, tuân thủ, test; đóng tính năng 27/11; nộp 1/12 | CORE-E08-01, E09-02, E01-03 | SCT-E05-04, E06-02, E06-03, E06-04, E06-05, E06-06, E09-03, E08-01, E07-03, E07-04, E10-02, E10-03, E10-04, E12-02, E12-03 | 3 + 12,5 = 15,5 |
-| | | **Tổng** | **42** | **50** | **92** |
+| | | **Tổng** | **43,5** | **50** | **93,5** |
 
 Mốc:
 - **S0:** song song với thủ tục của kế hoạch (Small Business Program, DSA trader status, bảng câu hỏi độ tuổi, Keyword Planner, landing page, privacy policy). Mọi mục ⚠ ảnh hưởng tới code MVP phải xác minh xong trong S0.
@@ -256,9 +256,11 @@ Mốc:
 - **27/11:** đóng tính năng. Tuần 30/11–4/12 chỉ sửa lỗi, chụp ảnh màn hình, đẩy metadata.
 - **1/12:** nộp App Store. **8/12:** phát hành thủ công. Còn đến 15/12 để xử lý một lần bị từ chối mà vẫn trước mùa tìm kiếm tháng 1–2.
 
+Sau khi lõi bổ sung CORE-E14-01 (`CoreDevice`) và CORE-E07-04 (link "Quản lý gói"), S3 vượt 0,5 ngày; phần này bù bằng mục 4 của cut-line nếu cần.
+
 S4 có 15,5 ngày công việc nhưng chỉ tuần đầu (khoảng 10 ngày công) dành cho tính năng. Phần dư khoảng 5,5 ngày: 4,5 ngày xử lý bằng cut-line, 1 ngày lấn vào đầu tuần ổn định.
 
-**Cut-line** (kích hoạt nếu cuối S2 trễ hơn 3 ngày công; chuyển sang `V1.1` theo thứ tự):
+**Cut-line** (kích hoạt khi giữa S2, ngày 30/10, burn-down trễ hơn 3 ngày công; chuyển sang `V1.1` theo thứ tự):
 1. SCT-E03-04 `ReceiptLLMExtractor` (1,5 ngày): ra mắt chỉ với luật; Foundation Models vẫn dùng cho phân loại.
 2. SCT-E08-01 tìm kiếm (1 ngày): chỉ giữ bộ lọc ở màn sổ.
 3. SCT-E06-05 PDF tổng hợp kỳ (1 ngày): ZIP chứa PDF từng chứng từ thay cho PDF kỳ.
@@ -267,4 +269,4 @@ S4 có 15,5 ngày công việc nhưng chỉ tuần đầu (khoảng 10 ngày cô
 
 Tổng cut-line khoảng 4,5 ngày.
 
-**Phương án B** (nếu cuối S3 vẫn trễ): nộp bản UK và EN-US ngày 1/12. Tách E-Rechnung (SCT-E04, 7 ngày) và chuỗi DE/FR sang bản 1.0.1 khoảng 15/12. Anh là thị trường nhạy lịch nhất vì hạn nộp tờ khai năm cuối tháng 1 (⚠ cần xác minh ngày chính xác). Đây cũng là phương án đã nêu trong rủi ro của lõi.
+**Phương án B** (quyết định cuối S2, ngày 6/11, nếu cut-line vẫn không đủ): S3–S4 ưu tiên luồng UK và EN-US. Bản 1.0 nộp ngày 1/12 và chỉ mở storefront UK, US. Phần E-Rechnung chưa xong (SCT-E04-04 đến E04-06), chuỗi DE/FR, kiểm thử trên bộ vàng DE/FR và storefront DE, AT, FR chuyển sang bản 1.0.1 khoảng 15/12. Anh là thị trường nhạy lịch nhất vì hạn nộp tờ khai năm cuối tháng 1 (⚠ cần xác minh ngày chính xác). Đây cũng là phương án đã nêu trong rủi ro của lõi.

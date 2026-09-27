@@ -54,7 +54,7 @@ Vì sao dùng một package nhiều product: mỗi app chỉ link module nó c�
 
 Đoạn code dưới là phác thảo interface để thống nhất giữa các app, không phải code cuối cùng. Tên API Apple lấy từ ghi chú nghiên cứu; chi tiết chữ ký hàm phải đối chiếu tài liệu Xcode 26.
 
-### 3.1 CoreDevice
+### 3.1 CoreDevice (CORE-E14-01)
 
 ```swift
 public struct Capabilities: Sendable {
@@ -221,12 +221,13 @@ Các ngân sách trên là mục tiêu thiết kế, cần hiệu chỉnh sau sp
 | CORE-E01-02 | Nền tảng | (ci) | Xcode Cloud: PR build + test; bước grep chặn `URLSession` | MVP | 1 | Khi PR thêm `URLSession` thì CI fail |
 | CORE-E01-03 | Nền tảng | (ci) | fastlane `deliver` cho metadata đa locale | MVP | 1 | Khi chạy lane thì metadata 4 locale được đẩy lên App Store Connect |
 | CORE-E02-01 | Chụp | CoreCapture | Bọc `VNDocumentCameraViewController` → `[CapturedPage]` | MVP | 1 | Khi quét 3 trang thì nhận 3 `CapturedPage` đúng thứ tự |
-| CORE-E02-02 | Chụp | CoreCapture | Bọc `DataScannerViewController` với vùng quan tâm | MVP | 2 | Khi máy không hỗ trợ thì trả lỗi `.unsupported` và UI chuyển sang chụp tĩnh |
+| CORE-E02-02 | Chụp | CoreCapture | Bọc `DataScannerViewController` với vùng quan tâm (xây cùng app 02, 3/2027; app 01 không dùng) | MVP | 2 | Khi máy không hỗ trợ thì trả lỗi `.unsupported` và UI chuyển sang chụp tĩnh |
 | CORE-E02-03 | Chụp | CoreCapture | Nhập ảnh (`PhotosPicker`) và file (`fileImporter`) | MVP | 1 | Khi chọn HEIC/JPEG/PDF thì chuyển thành `CapturedPage` |
 | CORE-E02-04 | Chụp | CoreCapture | Kiểm tra ống kính bẩn (`DetectLensSmudgeRequest`) | V1.1 | 1 | Khi điểm > ngưỡng thì hiện nhắc lau camera |
 | CORE-E03-01 | OCR | CoreOCR | `DocumentRecognizer` dùng `RecognizeDocumentsRequest` | MVP | 3 | Khi OCR hóa đơn mẫu thì trả về dòng, bảng và giá trị ngày/tiền |
 | CORE-E03-02 | OCR | CoreOCR | `LineRecognizer` dùng `VNRecognizeTextRequest`, chọn ngôn ngữ rõ ràng (gồm `vi-VT`) | MVP | 1,5 | Khi OCR hóa đơn tiếng Việt thì giữ đúng dấu ở ≥ 95% ký tự của bộ mẫu |
 | CORE-E03-03 | OCR | CoreOCR | Bộ chọn recognizer theo ngôn ngữ + danh sách ngôn ngữ hỗ trợ lúc chạy | MVP | 1 | Khi ngôn ngữ không hỗ trợ thì báo rõ và dùng dự phòng |
+| CORE-E03-04 | OCR | CoreOCR | Tùy chọn cho `LineRecognizer`: vùng quan tâm, bật/tắt `usesLanguageCorrection`, `customWords`, trả top-N ứng viên mỗi dòng (cần cho app 02 và 03) | MVP | 1 | Khi bật top-N thì mỗi dòng trả tối đa N ứng viên kèm độ tin cậy; khi đặt vùng quan tâm thì chữ ngoài vùng bị bỏ |
 | CORE-E04-01 | Trích xuất | CoreExtraction | `RuleExtractor` khung chung (regex, `NSDataDetector`) | MVP | 2 | Có test cho ngày, tiền, mã số thuế mẫu |
 | CORE-E04-02 | Trích xuất | CoreExtraction | `LLMExtractor` khung chung (Foundation Models, `@Generable`, cắt khối theo token) | MVP | 3 | Khi FM không khả dụng thì không crash và trả `.unavailable` |
 | CORE-E04-03 | Trích xuất | CoreExtraction | `MergedExtractor` + độ tin cậy theo trường | MVP | 2 | Khi luật và LLM mâu thuẫn thì trường bị đánh dấu "cần xem lại" |
@@ -238,7 +239,8 @@ Các ngân sách trên là mục tiêu thiết kế, cần hiệu chỉnh sau sp
 | CORE-E06-03 | Xuất | CoreExport | Gói ZIP + SHA-256 cho từng file | MVP | 1 | Hash in trong PDF khớp hash tính lại |
 | CORE-E07-01 | Paywall | CorePaywall | Store service StoreKit 2 + `Entitlements` | MVP | 2 | Khi mua/khôi phục thì quyền lợi cập nhật ngay, kể cả khi app khởi động lại |
 | CORE-E07-02 | Paywall | CorePaywall | Màn paywall tuân thủ (không toggle, giá thực nổi nhất, mốc trial) | MVP | 2 | Checklist paywall trong kế hoạch đạt 100% |
-| CORE-E07-03 | Paywall | CorePaywall | Offer code, win-back, "Quản lý gói" | V1.1 | 1 | Khi nhập offer code thì quyền lợi kích hoạt |
+| CORE-E07-03 | Paywall | CorePaywall | Offer code, win-back offer | V1.1 | 1 | Khi nhập offer code thì quyền lợi kích hoạt |
+| CORE-E07-04 | Paywall | CorePaywall | Link "Quản lý gói" (`AppStore.showManageSubscriptions`) trên paywall và trong Cài đặt | MVP | 0,5 | Khi bấm "Quản lý gói" thì trang quản lý thuê bao của Apple mở ra |
 | CORE-E08-01 | Bảo mật | CoreSecurity | Khóa Face ID + che nội dung trong app switcher | MVP | 1 | Khi bật khóa và quay lại sau 5 phút thì phải xác thực |
 | CORE-E09-01 | Thiết kế | CoreDesign | Token màu, chữ, khoảng cách; component nút, thẻ, danh sách; Dynamic Type | MVP | 3 | Mọi màn chính dùng được ở cỡ chữ lớn nhất accessibility |
 | CORE-E09-02 | Thiết kế | CoreDesign | Nhãn VoiceOver, thông báo trạng thái xử lý | MVP | 1 | Luồng chính dùng được chỉ bằng VoiceOver |
@@ -247,8 +249,9 @@ Các ngân sách trên là mục tiêu thiết kế, cần hiệu chỉnh sau sp
 | CORE-E12-01 | Chẩn đoán | CoreDiagnostics | Logger, signpost, MetricKit (không gửi đi) | MVP | 1 | Không có log chứa nội dung người dùng |
 | CORE-E12-02 | Chẩn đoán | (tools) | `ocr-bench` CLI + bộ dữ liệu vàng + báo cáo precision/recall | MVP | 3 | CI in bảng precision/recall theo trường và ngôn ngữ |
 | CORE-E13-01 | Tuân thủ | CoreCompliance | `Disclaimer`, `AIGeneratedLabel`, `PrivacyInfo.xcprivacy`, mẫu Review Notes | MVP | 1,5 | Mọi văn bản do FM sinh ra có nhãn AI |
+| CORE-E14-01 | Năng lực thiết bị | CoreDevice | `Capabilities`: LiDAR, RoomPlan, Object Capture, live scanner, Foundation Models, ngôn ngữ OCR | MVP | 1 | Khi chạy trên Simulator hoặc máy không LiDAR thì các cờ phần cứng trả `false` và app không crash |
 
-**Tổng lõi:** khoảng 46 ngày công, trong đó MVP khoảng 42 ngày. Phần lớn làm song song với app 01 trong 10–11/2026; nếu chỉ có 1 dev thì đây là rủi ro lịch lớn nhất (xem mục 8).
+**Tổng lõi:** khoảng 48,5 ngày công, trong đó MVP khoảng 44,5 ngày. Phần lớn làm song song với app 01 trong 10–11/2026; nếu chỉ có 1 dev thì đây là rủi ro lịch lớn nhất (xem mục 8).
 
 Bản CSV: [shared-core-backlog.csv](shared-core-backlog.csv).
 
@@ -261,3 +264,16 @@ Bản CSV: [shared-core-backlog.csv](shared-core-backlog.csv).
 | Foundation Models trả sai trường hoặc chậm | Người dùng mất niềm tin | Luật chạy trước; LLM chỉ lấp chỗ trống; luôn có màn xem lại |
 | Chữ ký API iOS 26/27 khác ghi chú | Trễ lịch | Mọi mục ⚠ phải xác minh trong tuần 1 |
 | Nhãn "Data Not Collected" bị ảnh hưởng bởi CloudKit/MetricKit | Mất lợi thế định vị | Giữ MVP không sync; hỏi kỹ hướng dẫn App Privacy trước `V1.1` |
+
+## 9. Điều chỉnh sau khi thiết kế chi tiết 3 app
+
+Thiết kế chi tiết của 3 app chỉ ra 4 chỗ lõi còn thiếu. Đã xử lý như sau:
+
+| Vấn đề | App phát hiện | Cách xử lý |
+|---|---|---|
+| `CoreDevice` chưa có ID trong backlog | KKL | Thêm CORE-E14-01 (MVP, 1 ngày) |
+| Checklist paywall cần link "Quản lý gói" ngay bản đầu, nhưng CORE-E07-03 là V1.1 | SCT | Tách thành CORE-E07-04 (MVP, 0,5 ngày); CORE-E07-03 còn offer code và win-back |
+| `LineRecognizer` cần vùng quan tâm, tắt sửa chính tả, `customWords`, top-N ứng viên | NDU, KKL | Thêm CORE-E03-04 (MVP, 1 ngày) |
+| App 01 không dùng live scanner | SCT | CORE-E02-02 vẫn là MVP của lõi nhưng xây cùng app 02 (3/2027) |
+
+Còn để ở app, chưa đưa vào lõi: camera chụp ảnh thường (AVFoundation) do KKL-E03-01 xây. Có thể chuyển vào `CoreCapture` khi app thứ hai cần.

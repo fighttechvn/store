@@ -136,8 +136,8 @@ Ghi chú:
 | ID | Module | Feature | Ưu tiên | Ngày | Phụ thuộc | Tiêu chí nghiệm thu |
 |---|---|---|---|---|---|---|
 | NDU-E08-01 | AllergenLens | Sản phẩm `ndu.plus.yearly` (trial 7 ngày), StoreKit Configuration, ánh xạ quyền lợi `familyProfiles`, `travelCards`, `history` | MVP | 1 | CORE-E07-01 | Khi mua hoặc khôi phục thì 3 quyền lợi mở ngay; khi gói hết hạn thì dữ liệu còn nguyên, chỉ bị khóa xem, và quét vẫn dùng đầy đủ |
-| NDU-E08-02 | AllergenLens | Paywall theo ngữ cảnh (hồ sơ thứ 2, thẻ, lịch sử), ưu đãi cuối onboarding, xem trước thẻ | MVP | 1 | CORE-E07-02, NDU-E08-01 | Khi đóng paywall thì người dùng về đúng chỗ cũ và quét vẫn dùng được; checklist paywall của kế hoạch đạt 100% |
-| NDU-E08-03 | AllergenLens | Offer code, win-back offer, "Quản lý gói" | V1.1 | 0,5 | CORE-E07-03 | Khi nhập offer code thì quyền lợi Plus kích hoạt |
+| NDU-E08-02 | AllergenLens | Paywall theo ngữ cảnh (hồ sơ thứ 2, thẻ, lịch sử), ưu đãi cuối onboarding, xem trước thẻ | MVP | 1 | CORE-E07-02, NDU-E08-01; CORE-E07-04 | Khi đóng paywall thì người dùng về đúng chỗ cũ và quét vẫn dùng được; checklist paywall của kế hoạch đạt 100% |
+| NDU-E08-03 | AllergenLens | Offer code, win-back offer | V1.1 | 0,5 | CORE-E07-03 | Khi nhập offer code thì quyền lợi Plus kích hoạt |
 | NDU-E08-04 | AllergenLens | Gói tháng hoặc gói trọn đời để thử nghiệm giá ⚠ | V2 | 0,5 | NDU-E08-01 | Khi thêm sản phẩm mới thì ánh xạ quyền lợi và các màn bị khóa không phải sửa |
 
 Ghi chú: quét không giới hạn, cả 9 ngôn ngữ đọc, 14 chất, chế độ ăn, thành phần tùy chỉnh, cảnh báo "Có thể có" và chỉ báo độ phủ **luôn miễn phí**. Không đặt bất kỳ thông tin an toàn nào sau paywall.

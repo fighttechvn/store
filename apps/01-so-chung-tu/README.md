@@ -11,7 +11,7 @@ App iPhone chụp và nhận hóa đơn, biên lai, hóa đơn điện tử; tr�
 - **Không nhắm** người làm công ăn lương ở Đức, vì họ đã có MeinElster+ miễn phí và chính thức.
 - **App xuất file, không nộp thuế.** App không nộp dữ liệu cho HMRC và không bao giờ tuyên bố được HMRC công nhận. Người dùng đưa file xuất vào phần mềm tương thích MTD hoặc gửi cho kế toán.
 - **Thu tiền cho đầu ra.** Chụp, lưu, xem, tìm và xuất PDF từng chứng từ luôn miễn phí. Gói Pro mở xuất theo kỳ cho kế toán (CSV, PDF kỳ, ZIP) và tự phân loại. Nhiều hồ sơ doanh nghiệp vào Pro ở `V1.1`.
-- **Khối lượng:** 87 feature. MVP 50 ngày công, `V1.1` 52,5 ngày, `V2` 22,5 ngày. Lõi MVP khoảng 42 ngày tính riêng.
+- **Khối lượng:** 87 feature. MVP 50 ngày công, `V1.1` 52,5 ngày, `V2` 22,5 ngày. Lõi MVP khoảng 44,5 ngày tính riêng.
 - **Lịch:** xây từ 28/9 đến 27/11/2026, nộp App Store ngày 1/12, phát hành dự kiến 8/12/2026. Cần **2 dev iOS toàn thời gian**; 1 dev không kịp mùa thuế (xem [Lộ trình sprint](epics-features.md#lộ-trình-sprint)).
 
 ## Tài liệu trong thư mục
@@ -142,7 +142,7 @@ Quyết định theo mục 6 của kế hoạch:
 
 | Rủi ro | Ảnh hưởng | Cách xử lý |
 |---|---|---|
-| Lõi và app cần khoảng 92 ngày công trong 10 tuần | Lỡ mùa thuế tháng 1–2 | 2 dev từ 28/9; cut-line khoảng 4,5 ngày; phương án B ra UK/EN-US trước, DE/FR ở 1.0.1 (xem [lộ trình](epics-features.md#lộ-trình-sprint)) |
+| Lõi và app cần khoảng 93,5 ngày công trong 10 tuần | Lỡ mùa thuế tháng 1–2 | 2 dev từ 28/9; cut-line khoảng 4,5 ngày; phương án B ra UK/EN-US trước, DE/FR ở 1.0.1 (xem [lộ trình](epics-features.md#lộ-trình-sprint)) |
 | Cầu "receipt scanner" yếu, "Belege scannen" không có dữ liệu | Ít lượt tải tự nhiên | Chạy Keyword Planner trước khi chốt metadata; Apple Ads exact match theo storefront |
 | Tuyên bố pháp lý sai (HMRC, GoBD, tư vấn thuế) | Bị từ chối review, rủi ro pháp lý | Disclaimer cố định, kiểm tra chuỗi trong CI, rà soát pháp lý mọi mục ⚠ trước khi đưa vào metadata |
 | Trích xuất sai mà không báo | Mất niềm tin, hoàn tiền | Luật chạy trước; LLM chỉ lấp chỗ trống; kiểm tra toán VAT; màn xem lại; ngưỡng tự chấp nhận thận trọng |

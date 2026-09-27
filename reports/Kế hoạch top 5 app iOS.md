@@ -36,6 +36,8 @@ Kế hoạch này dựa trên báo cáo [App iPhone offline dùng cảm biến](
 
 ■ xây dựng · ◆ ra mắt · ● mùa cao điểm tìm kiếm. Mỗi app có 8 tuần đo lường trước khi quyết định dừng hay đẩy mạnh (mục 6).
 
+**Cập nhật sau thiết kế chi tiết** ([apps/](../apps/README.md)): 3 app đầu tiên cộng phần lõi cần khoảng 184,5 ngày công cho MVP. Lịch trên chỉ giữ được với **2 dev iOS từ cuối 9/2026 đến hết 4/2027**, cộng khoảng 148 ngày công nội dung cho app 2 (từ điển dị ứng, thẻ du lịch, bộ ảnh kiểm thử). Với 1 dev, app 1 nộp khoảng 2/2027 và lỡ mùa thuế.
+
 Lý do thứ tự:
 - **App 1 trước:** chạy trên mọi iPhone, bám bể doanh thu lớn nhất, có mốc quy định lặp lại (ngưỡng UK MTD hạ xuống £30K năm 2027 và £20K năm 2028), và đối thủ ở Đức không xử lý on-device.
 - **App 3 thứ hai:** dùng lại phần OCR và xuất PDF của app 1; có từ khóa tăng nhanh nhất; lấp khoảng trống Encircle để lại khi bỏ app kiểm kê phổ thông (17/12/2025).

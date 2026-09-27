@@ -50,3 +50,44 @@ Phần dùng chung cho cả 3 app nằm ở [shared-core.md](shared-core.md) (m�
 - Lõi chạy trên mọi iPhone hỗ trợ iOS 26. Foundation Models (iPhone 15 Pro trở lên) và LiDAR (dòng Pro) chỉ là lớp nâng cấp, luôn có đường dự phòng.
 - Thanh toán qua Apple IAP (StoreKit 2), đăng ký Small Business Program. Ở EU không bật thanh toán thay thế hay link-out.
 - Bản địa hóa đợt 1: EN-US, EN-UK, DE, FR. Tiếng Việt có trong app 1 (chế độ VN) và đợt 3 cho các app còn lại.
+
+## Tổng hợp khối lượng
+
+Số liệu lấy từ các file `backlog.csv`; đơn vị là ngày công của 1 dev.
+
+| Phần | Epic | Feature | MVP | V1.1 | V2 | Tổng |
+|---|---|---|---|---|---|---|
+| [Lõi `SensorCore`](shared-core.md) | 14 | 33 | 44,5 | 4 | 0 | 48,5 |
+| [01 · Sổ chứng từ](01-so-chung-tu/) | 12 | 87 | 50 | 52,5 | 22,5 | 125 |
+| [02 · Nhãn dị ứng](02-nhan-di-ung/) | 10 | 69 | 45 | 20 | 11 | 76 |
+| [03 · Kiểm kê LiDAR](03-kiem-ke-lidar/) | 11 | 100 | 45 | 37 | 33 | 115 |
+| **Tổng** | **47** | **289** | **184,5** | **113,5** | **66,5** | **364,5** |
+
+App 02 còn khoảng **148 ngày công nội dung** cho MVP, không phải code: từ điển dị ứng 9 ngôn ngữ, mẫu thẻ du lịch, bộ ảnh nhãn để kiểm thử an toàn, bản dịch, rà soát pháp lý.
+
+### Epic của từng app
+
+| App | Epic |
+|---|---|
+| 01 · Sổ chứng từ | E01 Onboarding & hồ sơ · E02 Chụp & nhập chứng từ · E03 Nhận dạng & trích xuất · E04 Hóa đơn điện tử · E05 Phân loại & sổ sách · E06 Kỳ báo cáo & xuất · E07 Lưu trữ, bảo mật & toàn vẹn · E08 Tìm kiếm & tích hợp hệ thống · E09 Paywall & gói · E10 Bản địa hóa & tuân thủ · E11 Chế độ Việt Nam (V1.1) · E12 Chất lượng |
+| 02 · Nhãn dị ứng | E01 Onboarding & hồ sơ dị ứng · E02 Quét nhãn · E03 Phân tích thành phần · E04 Từ điển & dữ liệu · E05 Kết quả & giải thích · E06 Thẻ dị ứng du lịch · E07 Lịch sử & sản phẩm đã lưu · E08 Paywall & gói · E09 Bản địa hóa & tuân thủ · E10 An toàn & chất lượng |
+| 03 · Kiểm kê LiDAR | E01 Bất động sản & dự án · E02 Quét phòng LiDAR · E03 Chế độ không LiDAR · E04 Kiểm kê đồ đạc · E05 Tình trạng & biên bản · E06 Báo cáo & xuất · E07 Module Pro tiền khảo sát cải tạo (V2) · E08 Lưu trữ & hiệu năng tài sản · E09 Paywall & gói · E10 Bản địa hóa & tuân thủ · E11 Chất lượng đo đạc |
+
+## Nhân sự và lịch
+
+Thiết kế chi tiết cho thấy kế hoạch 12 tháng ("1–2 dev") thực tế cần **2 dev iOS từ cuối 9/2026 đến hết 4/2027**, cộng một nhóm nội dung cho app 02.
+
+| Giai đoạn | Việc | Khối lượng trước khi nộp | Nhân sự tối thiểu | Ghi chú |
+|---|---|---|---|---|
+| 28/9–4/12/2026 | Lõi + app 01 | khoảng 93,5 ngày công | 2 dev toàn thời gian | 1 dev thì nộp khoảng 2/2027, lỡ mùa thuế. Có cut-line 4,5 ngày và phương án B (UK, US trước) |
+| 4/1–26/2/2027 | App 03 | 45 ngày công | 2 dev, hoặc 1 dev + 50% dev thứ hai | 1 dev thì lùi ra mắt 2–3 tuần |
+| 22/2–30/4/2027 | App 02 | 45 ngày công + 5 ngày spike | 1 dev (10 tuần) | Chồng lên giai đoạn sửa lỗi sau ra mắt app 03. Nội dung 148 ngày công phải bắt đầu từ 12/2026–1/2027 |
+
+## Việc cần xác minh sớm nhất
+
+Mỗi thư mục có danh sách ⚠ riêng. Các mục ảnh hưởng tới code MVP phải xác minh trong sprint đầu của app đó:
+
+- **Lõi:** danh sách ngôn ngữ của `RecognizeDocumentsRequest`; mã `vi-VT` trên máy thật; chữ ký API Foundation Models; `Decimal` trong SwiftData; ảnh hưởng của MetricKit/CloudKit tới nhãn "Data Not Collected".
+- **01:** lịch quý của UK MTD; danh mục chi phí từng nước; định dạng DATEV và phần mềm kế toán; bảng ánh xạ EN 16931 sang UBL/CII; đọc file đính kèm PDF/A-3.
+- **02:** câu chữ 14 chất gây dị ứng theo Phụ lục II Quy định 1169/2011 ở từng ngôn ngữ; nguồn dị ứng của E-number mơ hồ và giấy phép dữ liệu; phạm vi MDR, trách nhiệm sản phẩm và GDPR Điều 9; quy định sử dụng Foundation Models cho phần giải thích.
+- **03:** API RoomPlan (`floors`, `Codable`, `StructureBuilder`, lỗi phiên quét); App Review với sản phẩm "slot" không tiêu hao; nội dung bắt buộc của mẫu biên bản FR/UK/DE/NL.

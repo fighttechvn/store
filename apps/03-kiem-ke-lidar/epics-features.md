@@ -46,7 +46,7 @@ Mục tiêu: một phòng quét xong trong vài phút, ra kích thước và m²
 
 | ID | Module | Feature | Ưu tiên | Ngày | Phụ thuộc | Tiêu chí nghiệm thu |
 |---|---|---|---|---|---|---|
-| KKL-E02-01 | LedgerScan | Cổng năng lực: đọc `CoreDevice.Capabilities` (`RoomCaptureSession.isSupported`, `supportsSceneReconstruction(.mesh)`), chọn đường LiDAR hay dự phòng | MVP | 0,5 | CORE-E01-01 | Khi chạy trên máy không LiDAR hoặc Simulator thì app không khởi tạo `RoomCaptureSession`, không crash và mở chế độ dự phòng |
+| KKL-E02-01 | LedgerScan | Cổng năng lực: đọc `CoreDevice.Capabilities` (`RoomCaptureSession.isSupported`, `supportsSceneReconstruction(.mesh)`), chọn đường LiDAR hay dự phòng | MVP | 0,5 | CORE-E14-01 | Khi chạy trên máy không LiDAR hoặc Simulator thì app không khởi tạo `RoomCaptureSession`, không crash và mở chế độ dự phòng |
 | KKL-E02-02 | LedgerScan | Bọc `RoomCaptureView` cho SwiftUI: bật coaching, nút Xong/Hủy, giữ màn hình sáng, khóa hướng dọc | MVP | 1,5 | KKL-E02-01 | Khi quét xong một phòng 4 tường và bấm Xong thì nhận được `CapturedRoomData` và phiên dừng |
 | KKL-E02-03 | LedgerScan | Vòng đời phiên: app xuống nền, cuộc gọi, lỗi kết thúc phiên (vượt kích thước cảnh, mất tracking ⚠ tên lỗi), `thermalState`, cảnh báo bộ nhớ; bộ đếm phiên bắt đầu/hoàn tất lưu trên máy | MVP | 1 | KKL-E02-02 | Khi app xuống nền giữa phiên thì quay lại thấy màn "Phiên bị gián đoạn" có nút quét lại; khi `thermalState` là `.critical` thì phiên dừng và dữ liệu đã có được giữ |
 | KKL-E02-04 | LedgerScan | Hậu xử lý `RoomBuilder` → `CapturedRoom`; lưu `CapturedRoomData` trước khi xử lý, JSON của `CapturedRoom` (Codable ⚠) và USDZ vào kho tài sản | MVP | 1 | KKL-E02-02; KKL-E08-01 | Khi builder xong thì có file JSON và USDZ; JSON đọc lại thành `CapturedRoom` có cùng số tường, cửa, cửa sổ |
@@ -165,12 +165,12 @@ Mục tiêu: thu tiền cho quy trình nhiều nhà và thương hiệu, không 
 |---|---|---|---|---|---|---|
 | KKL-E09-01 | LedgerPaywall | Danh mục sản phẩm và ánh xạ quyền lợi: `kkl.pro.yearly`, `kkl.property.slot.01`…`.10` → `propertyLimit`, `brandedTemplates`, `landlordTools` | MVP | 1 | CORE-E07-01 | Khi mua `kkl.pro.yearly` thì `propertyLimit` thành không giới hạn ngay, kể cả sau khi khởi động lại app |
 | KKL-E09-02 | LedgerPaywall | Slot bất động sản: gán slot đã mua cho một nhà; khôi phục số slot sau cài lại; nhà vượt hạn mức chuyển chỉ đọc nhưng vẫn xem và xuất được | MVP | 1 | KKL-E09-01; KKL-E01-02 | Khi gói năm hết hạn và người dùng có 3 nhà, 1 slot thì 2 nhà giữ quyền sửa, nhà còn lại chỉ đọc nhưng vẫn xuất PDF được |
-| KKL-E09-03 | LedgerPaywall | Điểm hiện paywall: tạo nhà thứ 2, chọn mẫu thương hiệu; nội dung paywall 4 ngôn ngữ; không bao giờ chặn xuất | MVP | 0,5 | CORE-E07-02; KKL-E09-01 | Khi người dùng miễn phí tạo nhà thứ 2 thì paywall hiện gói năm và "thêm 1 nhà" cạnh nhau; khi bấm xuất PDF/USDZ thì không bao giờ mở paywall |
+| KKL-E09-03 | LedgerPaywall | Điểm hiện paywall: tạo nhà thứ 2, chọn mẫu thương hiệu; nội dung paywall 4 ngôn ngữ; không bao giờ chặn xuất | MVP | 0,5 | CORE-E07-02; KKL-E09-01; CORE-E07-04 | Khi người dùng miễn phí tạo nhà thứ 2 thì paywall hiện gói năm và "thêm 1 nhà" cạnh nhau; khi bấm xuất PDF/USDZ thì không bao giờ mở paywall |
 | KKL-E09-04 | LedgerPaywall | 🧪 Kiểm chứng sớm rủi ro review: tạo sản phẩm slot trong App Store Connect, hỏi App Review, chuẩn bị phương án B (chỉ gói năm) | MVP | 0,5 | CORE-E07-01 | Khi hết sprint 1 thì có câu trả lời hoặc quyết định phương án, ghi vào mục 10 của thiết kế kỹ thuật |
 | KKL-E09-05 | LedgerPaywall | Test StoreKit: file `.storekit`, `SKTestSession` cho mua, khôi phục, hoàn tiền, hết hạn, Ask to Buy | MVP | 0,5 | KKL-E09-02 | Khi giả lập hoàn tiền một slot thì nhà gắn slot đó chuyển chỉ đọc và dữ liệu không mất |
 | KKL-E09-06 | LedgerPaywall | Gói chủ nhà: non-consumable 5 slot (`kkl.bundle.landlord5`) nếu dữ liệu cho thấy nhiều người mua 2–4 slot | V1.1 | 0,5 | KKL-E09-02 | Khi mua gói chủ nhà thì hạn mức tăng 5 và khôi phục được |
 | KKL-E09-07 | LedgerPaywall | Gói tháng hoặc trọn đời (thử ở DE) theo kết quả 8 tuần | V1.1 | 0,5 | KKL-E09-01 | Khi mua trọn đời thì quyền lợi giống gói năm và không hết hạn |
-| KKL-E09-08 | LedgerPaywall | Offer code, win-back, "Quản lý gói" | V1.1 | 0,5 | CORE-E07-03 | Khi nhập offer code gói năm thì quyền lợi kích hoạt |
+| KKL-E09-08 | LedgerPaywall | Offer code, win-back | V1.1 | 0,5 | CORE-E07-03 | Khi nhập offer code gói năm thì quyền lợi kích hoạt |
 
 ## KKL-E10 · Bản địa hóa & tuân thủ
 
@@ -219,7 +219,7 @@ Mục tiêu: có số liệu thật về sai số trước khi viết bất kỳ
 
 Số feature theo ưu tiên: MVP 49, V1.1 35, V2 16. Trong đó có 4 spike 🧪 (KKL-E02-08, KKL-E02-11, KKL-E07-05, KKL-E09-04).
 
-Phần lõi dùng lại (không tính ở trên): CoreCapture (CORE-E02-01..03), CoreOCR (CORE-E03-01..03), CoreExtraction (CORE-E04-01, -03), CoreStore (CORE-E05-01..03), CoreExport (CORE-E06-01..03), CorePaywall (CORE-E07-01..03), CoreSecurity (CORE-E08-01), CoreDesign (CORE-E09-01..02), CoreLocalization (CORE-E10-01), CoreIntents (CORE-E11-01), CoreDiagnostics (CORE-E12-01), CoreCompliance (CORE-E13-01). `CoreDevice` có trong [shared-core.md mục 3.1](../shared-core.md) nhưng chưa có ID trong backlog lõi; tạm tham chiếu CORE-E01-01 (xem câu hỏi mở ở thiết kế kỹ thuật).
+Phần lõi dùng lại (không tính ở trên): CoreCapture (CORE-E02-01..03), CoreOCR (CORE-E03-01..03), CoreExtraction (CORE-E04-01, -03), CoreStore (CORE-E05-01..03), CoreExport (CORE-E06-01..03), CorePaywall (CORE-E07-01..04), CoreSecurity (CORE-E08-01), CoreDesign (CORE-E09-01..02), CoreLocalization (CORE-E10-01), CoreIntents (CORE-E11-01), CoreDiagnostics (CORE-E12-01), CoreCompliance (CORE-E13-01). CoreDevice (CORE-E14-01).
 
 ## Lộ trình sprint
 

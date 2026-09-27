@@ -841,7 +841,7 @@ TestFlight bên ngoài từ cuối S3 (khoảng 12/2/2027): ≥ 30 người ở 
 
 ## 14. Câu hỏi mở
 
-1. **`CoreDevice` chưa có ID trong backlog lõi.** Đề xuất lõi thêm một feature (khoảng 0,5 ngày) cho `Capabilities`, hoặc gộp vào CORE-E01-01. KKL tạm tham chiếu CORE-E01-01.
+1. ~~**`CoreDevice` chưa có ID trong backlog lõi.**~~ Đã xử lý: lõi thêm CORE-E14-01 (MVP), KKL-E02-01 phụ thuộc vào đó.
 2. **Camera chụp ảnh thường** chưa có trong CoreCapture. KKL tự làm ở KKL-E03-01; có đưa vào lõi cho app 02/05 không?
 3. **Tham số OCR:** `LineRecognizer` (CORE-E03-02) cần cho phép tắt `usesLanguageCorrection` và đặt vùng quan tâm cho serial và đồng hồ.
 4. **iPad Pro** có LiDAR và chạy RoomPlan: có hỗ trợ ngay ở MVP không? Đề xuất: chỉ iPhone ở MVP, xem lại ở V2.
